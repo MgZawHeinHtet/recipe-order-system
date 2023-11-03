@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::get('/login',[AuthController::class, 'show']);
+
+Route::post('/login',[AuthController::class, 'login']);
+
+Route::get('/logout',[AuthController::class, 'logout']);
+
+
+
+Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
+    Route::get('',[DashboardController::class,'index'])->middleware(['auth','admin']);
+    Route::get('/products',[ProductController::class, 'index']);
 });

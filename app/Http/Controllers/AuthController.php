@@ -13,23 +13,27 @@ use Illuminate\Validation\Rule;
 class AuthController extends Controller
 {
     //login
-    public function login(AuthRequest $authRequest){
-      
-        if(Auth::attempt($authRequest->validated())){
-            return response()->json(['status'=>"true",'msg'=>'success']);
+    public function show(){
+        return view('Auth.signin');
+    }
+
+    public function login(AuthRequest $request){
+        if(Auth::attempt($request->validated())){
+            return redirect('/')->with('success','login successfully');
         }else{
-            return response()->json($authRequest->all());
+            return redirect('/login')->withErrors(['errMsg'=>"Wrong Credentials!"])->withInput();
         }
-      
     }
 
     //register
     public function register(RegisterRequest $request){
-            if(!$request->validated()){
-                return response()->json(['status'=>false,'err'=>$request->messages()]);
-            }
-       
             User::create($request->validated());
             return response()->json(['status'=>'success','msg'=>'created successfully']);
     }
+
+   public function logout(){
+        Auth::logout();
+        session()->flush();
+        return redirect('/');
+   }
 }
