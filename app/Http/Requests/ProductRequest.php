@@ -28,16 +28,10 @@ class ProductRequest extends FormRequest
         return [
             'title' => ['required',Rule::unique('products','title')],
             'description'=>['required','max:200'],
-            'img'=>['required'],
-            'rating'=>['required','integer','between:0,6'],
-            'price'=>['required','']
+            'photo'=>['required','image'],
+            'price'=>['required','numeric'],
+            'category_id' => ['required',Rule::exists('categories','id')]
         ];
     }
-    public function failedValidation(ValidationValidator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'success'=>'false',
-            'errors'=>$validator->errors()
-        ]));
-    }
+   
 }

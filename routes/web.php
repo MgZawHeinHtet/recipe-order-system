@@ -30,5 +30,5 @@ Route::get('/logout',[AuthController::class, 'logout']);
 
 Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
     Route::get('',[DashboardController::class,'index'])->middleware(['auth','admin']);
-    Route::get('/products',[ProductController::class, 'index']);
+    Route::resource('products',ProductController::class);
 });

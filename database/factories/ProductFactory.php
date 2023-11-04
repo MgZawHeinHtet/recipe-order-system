@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Process\FakeProcessSequence;
 
@@ -20,9 +21,9 @@ class ProductFactory extends Factory
         return [
             'title' => fake()->words(5,true),
             'description' => fake()->paragraph(),
-            'img'=>fake()->imageUrl(),
-            'rating'=>fake()->numberBetween(1,6),
-            'price'=>fake()->randomNumber(4)
+            'photo'=>fake()->imageUrl(),
+            'price'=>fake()->randomNumber(4),
+            'category_id' => Category::factory()
         ];
     }
 }

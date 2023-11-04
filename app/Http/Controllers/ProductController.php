@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -11,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('Dashboard.product');
+        return view('Dashboard.product', [
+            "products" => Product::with('category')->latest()->paginate(10)
+        ]);
     }
 
     /**
@@ -19,15 +25,22 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('Dashboard.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+
+        $cleanData = $request->validated();
+
+        $cleanData['photo'] = '/storage/' . $request->photo->store('/products');
+        Product::create($cleanData);
+        return redirect('/dashboard/products');
     }
 
     /**
@@ -41,24 +54,37 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+       
+        return view(
+            'Dashboard.edit',
+            [
+                'product' => $product,
+                'categories' => Category::all()
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+
+        $cleanData = $request->validated();
+        $cleanData['photo'] = '/storage/' . $request->photo->store('/products');
+        $product->update($cleanData);
+        $product->save();
+        return redirect('/dashboard/products');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return back()->with('success', 'Delete Successfully!');
     }
 }
