@@ -2,14 +2,19 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Validation\Rule;
+
+use Illuminate\Support\Str;
 
 class ProductRequest extends FormRequest
 {
+    private $isUpdate;
+    public function __construct()
+    {
+        $this->isUpdate = Str::contains(url()->previous(),'edit');
+    }
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,10 +30,11 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
+       
         return [
-            'title' => ['required',Rule::unique('products','title')],
+            'title' => ['required'],
             'description'=>['required','max:200'],
-            'photo'=>['required','image'],
+            'photo' => [$this->isUpdate?'':'required','image'],
             'price'=>['required','numeric'],
             'category_id' => ['required',Rule::exists('categories','id')]
         ];

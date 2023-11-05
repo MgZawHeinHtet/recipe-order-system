@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
@@ -25,9 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('Dashboard.create', [
-            'categories' => Category::all()
-        ]);
+        return view('Dashboard.create');
     }
 
     /**
@@ -40,7 +39,7 @@ class ProductController extends Controller
 
         $cleanData['photo'] = '/storage/' . $request->photo->store('/products');
         Product::create($cleanData);
-        return redirect('/dashboard/products');
+        return redirect('/dashboard/products')->with('create','Created Successfully 🎉');
     }
 
     /**
@@ -71,12 +70,21 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-
         $cleanData = $request->validated();
-        $cleanData['photo'] = '/storage/' . $request->photo->store('/products');
-        $product->update($cleanData);
-        $product->save();
-        return redirect('/dashboard/products');
+        if($request->photo){
+           
+                if(File::exists($path = public_path($product->photo))){
+                File::delete($path);
+            }
+            $product->photo = '/storage/' . $request->photo->store('/products');
+        }
+        $product->title = $cleanData['title'];
+        $product->description = $cleanData['description'];
+        $product->price = $cleanData['price'];
+        $product->category_id = $cleanData['category_id'];
+        
+        $product->update();
+        return redirect('/dashboard/products')->with('edit','Updated Successfully 🎉');
     }
 
     /**
@@ -85,6 +93,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return back()->with('success', 'Delete Successfully!');
+        return back()->with('delete', 'Delete Successfully! 🎆');
     }
 }

@@ -16,10 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//starter route
 Route::get('/', function () {
     return view('index');
 });
 
+
+//Auth route
 Route::get('/login',[AuthController::class, 'show']);
 
 Route::post('/login',[AuthController::class, 'login']);
@@ -27,7 +30,7 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::get('/logout',[AuthController::class, 'logout']);
 
 
-
+//admin dashboard Route
 Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
     Route::get('',[DashboardController::class,'index'])->middleware(['auth','admin']);
     Route::resource('products',ProductController::class);
