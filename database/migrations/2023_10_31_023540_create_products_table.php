@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('description');
             $table->string('photo');
             $table->double('price');
+            $table->integer('rating')->default(5);
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
         });

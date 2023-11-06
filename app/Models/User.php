@@ -44,4 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function ratedProducts(){
+        return $this->belongsToMany(Product::class);
+    }   
+
+    public function isRating($product){
+        return $this->ratedProducts->contains('id',$product->id);
+    }
+
+   
 }

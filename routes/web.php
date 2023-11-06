@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,4 +35,9 @@ Route::get('/logout',[AuthController::class, 'logout']);
 Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
     Route::get('',[DashboardController::class,'index'])->middleware(['auth','admin']);
     Route::resource('products',ProductController::class);
+});
+
+//rating route
+Route::middleware(['rating'])->group(function(){
+    Route::post('/products/{product:id}/rating',[RatingController::class,'rating']);
 });
