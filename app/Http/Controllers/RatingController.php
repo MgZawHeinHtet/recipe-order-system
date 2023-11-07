@@ -33,7 +33,7 @@ class RatingController extends Controller
             //same user ,different rating ,so need to moderate rating
             $product->ratedUsers()->updateExistingPivot($curr_user, ['rate' => $new_rating]);
             $product->reduceAndAddRating($old_rating,$new_rating);
-        } else {
+        } else { 
             //new user, so plug in and add rating
             $product->ratedUsers()->attach($curr_user);
             $product->ratedUsers()->updateExistingPivot($curr_user, ['rate' => $new_rating]);

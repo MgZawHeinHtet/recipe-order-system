@@ -47,7 +47,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('product.product-detail');
     }
 
     /**

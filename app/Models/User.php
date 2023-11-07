@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Cart;
 
 class User extends Authenticatable
 {
@@ -53,5 +54,8 @@ class User extends Authenticatable
         return $this->ratedProducts->contains('id',$product->id);
     }
 
-   
+    public function cart(){
+        return $this->belongsTo(Cart::class,'id');
+    }
+
 }

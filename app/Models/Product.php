@@ -53,7 +53,6 @@ class Product extends Model
         $this->oldRating($old);
         $this->addRating($new);
     }
-
     public function getAvgRating(){
         //plus 1 for count defaut 
         return $this->rating / ($this->ratedUsers->count()+1);

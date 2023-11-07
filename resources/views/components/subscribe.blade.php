@@ -10,7 +10,7 @@
             </div>
             <div class="flex items-center justify-center  border-slate-500">
                 <button
-                    class="bg-green-500 w-[80%] h-14 text-base uppercase text-slate-100 hover:bg-green-600 transition-all duration-200">Send</button>
+                    class="bg-green-500 w-[80%] h-14 text-base uppercase text-slate-100 hover:bg-green-600 transition-all duration-200">Subscribe Us</button>
             </div>
         </div>
     </form>
