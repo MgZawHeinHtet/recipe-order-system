@@ -28,6 +28,7 @@ class Product extends Model
         'price',
         'category_id'
     ];
+    private $ratingCount ;
     public function category(){
         return $this->belongsTo(Category::class);
     }
@@ -38,23 +39,33 @@ class Product extends Model
 
     public function oldRating()
     {
-        return $this->belongsToMany(User::class)->withPivot('rate');
+        return $this->belongsToMany(User::class)->withPivot('rate')->first()->pivot->rate;
     }
 
     public function addRating($value){
         $this->rating += $value;
+        $this->avg_rating = $this->getAvgRating();
     }
 
     public function reduceRating($value){
         $this->rating-= $value;
+        $this->avg_rating = $this->getAvgRating();
     }
 
     public function reduceAndAddRating($old,$new){
-        $this->oldRating($old);
+        $this->reduceRating($old);
         $this->addRating($new);
     }
     public function getAvgRating(){
         //plus 1 for count defaut 
         return $this->rating / ($this->ratedUsers->count()+1);
+    }
+
+    public function cart_items(){
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function getProductFromCart(){
+        return $this->cart_items()->where('cart_id',auth()->user()->cart->id)->first();
     }
 }

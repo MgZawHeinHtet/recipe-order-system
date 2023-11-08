@@ -16,6 +16,18 @@
 
     {{-- footer  --}}
     <x-footer></x-footer>
+    
+    <script>
      
+      const inputCount = document.getElementById('quantity_count');
+      const total = document.getElementById('show_total');
+      const price = document.getElementById('product_price');
+
+      inputCount.addEventListener('change', function(){
+        total.innerText = '$' + Number.parseFloat(inputCount.value*(price.innerText)).toFixed(2) ;
+      })
+
+    
+    </script>
 </body>
 </html>

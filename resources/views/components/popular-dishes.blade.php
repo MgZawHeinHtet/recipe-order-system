@@ -2,7 +2,7 @@
     <div>
         <h2 class="antialiased font-sans text-5xl font-bold capitalize text-slate-700 tracking-wide">popular dishes
         </h2>
-        <div class="grid grid-cols-4 gap-5 my-24">
+        <div class="grid grid-cols-5 gap-5 my-24">
 
             {{-- testing add to card tem create  --}}
             @foreach ($products as $product)

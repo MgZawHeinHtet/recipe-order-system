@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //starter route
 Route::get('/', function () {
     return view('index',[
-        'products' => Product::latest()->paginate(8)
+        'products' => Product::with('category')->latest()->paginate(10),
     ]);
 });
 

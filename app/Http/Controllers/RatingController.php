@@ -9,15 +9,17 @@ class RatingController extends Controller
 {
     public function rating(Product $product)
     {
-
+        //user_input_rate 
+        $rate = request()->rating;
+       
         //check user is already give rationg
         $user_exit = auth()->user()->isRating($product);
         
-        //get old rating from pivot table (very messy need to refactor)
-        $old_rating = $user_exit ? $product->oldRating?->all()[0]->pivot->rate : false;
+        //get old rating from pivot table 
+        $old_rating = $user_exit ? $product->oldRating() : false;
         
         //new rating from input star
-        $new_rating = request('rate');
+        $new_rating = $rate;
         
         //if alredy give then check old and new rating is the same
         $is_same_rating = ($new_rating == $old_rating);
