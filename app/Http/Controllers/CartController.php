@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     public function addToCart(Product $product){
+        $quantity = request()->quantity ;
         $curr_user = auth()->user();
         $curr_user_id = $curr_user->id;
         
@@ -20,12 +21,12 @@ class CartController extends Controller
         ]);
 
         //CALL BACK
-        $this->add_product_to_cart_item($curr_user,$product);
+        $this->add_product_to_cart_item($curr_user,$product,$quantity);
 
         return back();
     }
 
-    public function add_product_to_cart_item($user,$product){
+    public function add_product_to_cart_item($user,$product,$quantity){
         $user_cart = $user->cart;
        
         //PRODUCT ID IS ALREADY EXIT IN CART_ITEM TABLES
@@ -38,7 +39,7 @@ class CartController extends Controller
                 'quantity' => 1
             ]);
         }else{
-            $is_product_exist_cart_item->quantity += 1;
+            $is_product_exist_cart_item->quantity += $quantity ;
             $is_product_exist_cart_item->update();
         }
     }

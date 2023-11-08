@@ -76,6 +76,7 @@
 
                             <input id="quantity_count" min="1"
                                 class="border-0 w-20 h-10 text-center rounded focus:ring-green-500"
+                                name="quantity"
                                 value="{{ 1 }}"
                                 type="number"><label
                                 class="ml-5 font-bold text-sm capitalize text-gray-600 tracking-wider"
