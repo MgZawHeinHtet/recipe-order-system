@@ -16,7 +16,7 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check()) abort(403);
+        if(!Auth::check()) redirect('login');
         return $next($request);
     }
 }

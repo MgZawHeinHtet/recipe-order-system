@@ -19,14 +19,17 @@
     
     <script>
      
-      const inputCount = document.getElementById('quantity_count');
-      const total = document.getElementById('show_total');
-      const price = document.getElementById('product_price');
+      const inputCount = document.querySelector('#quantity_count');
+      const total = document.querySelector('#show_total');
+      const price = document.querySelector('#product_price');
+    
 
+     
       inputCount.addEventListener('change', function(){
         total.innerText = '$' + Number.parseFloat(inputCount.value*(price.innerText)).toFixed(2) ;
       })
-
+     
+   
     
     </script>
 </body>

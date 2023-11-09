@@ -39,6 +39,3 @@
     </div>
 </div>
 
-<script>
-    console.log('haha');
-</script>

@@ -43,7 +43,7 @@
         <!-- feature btn  -->
         <div class="flex items-center space-x-6">
             <div class="shopping-cart">
-                <button type="button"
+                <a href="/home/cart"
                     class="relative inline-flex items-center p-2 text-sm font-medium text-center text-white bg-white-700 rounded-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-white-300 dark:bg-white-600 dark:hover:bg-white-700 dark:focus:ring-white-800">
                     <i class="fa-solid fa-cart-shopping text-green-500 text-xl"></i>
                     <span class="sr-only">Notifications</span>
@@ -52,13 +52,14 @@
                         {{ auth()->check()&&auth()->user()->cart? auth()->user()->cart->cart_items->count(): 0 }}
 
                     </div>
-                </button>
+                </a>
             </div>
-            @if (Auth::check())
-                <div class="">
-                    <span>{{ auth()->user()->name }}</span>
-                </div>
-            @endif
+            @auth
+            <div class="">
+                <span>{{ auth()->user()->name }}</span>
+            </div>
+            @endauth
+           
         </div>
     </nav>
 </header>

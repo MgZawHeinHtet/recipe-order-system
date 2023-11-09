@@ -61,6 +61,10 @@ class Product extends Model
         return $this->rating / ($this->ratedUsers->count()+1);
     }
 
+    public function totalPrice($q){
+        return $this->price * $q;
+    }
+
     public function cart_items(){
         return $this->hasMany(CartItem::class);
     }

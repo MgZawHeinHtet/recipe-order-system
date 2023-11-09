@@ -14,7 +14,7 @@
                 <p class="text-base font-light tracking-wide text-justify">
                     {{ $product->description }}
                 </p>
-                <div class="Ingredients mb-10">
+                <div class="Ingredients mb-10 ring-1 ring-slate-300 py-3 px-5 rounded-lg">
                     <h6 class="text-lg  font-bold mb-3 tracking-wide">Ingredients</h6>
                     <div class="grid grid-cols-3 gap-x-5">
                         @for ($i = 0; $i < 8; $i++)
@@ -57,34 +57,34 @@
                     </form>
                 </div>
             </div>
-            <div class="prodct_cart bg-slate-100 col-span-1 w-[25%] h-[400px] space-y-5">
+            <div class="prodct_cart bg-slate-100 col-span-1 w-[25%]">
                 <form action="/products/{{ $product->id }}/addToCart" method="POST">
                     @csrf
                     <div class="w-full bg-green-500 py-3  rounded">
                         <span class="pl-3 text-white font-semibold tracking-wide">Product Price</span>
                     </div>
                     <div class="px-3 ">
-                        <p class="font-bold text-gray-600 tracking-normal mt-8">Add to cart and order now</p>
-                        <span class="flex justify-between items-center mt-6">
+                        <p class="font-bold text-gray-600 tracking-normal mt-4">Add to cart and order now</p>
+                        <span class="flex justify-between items-center mt-2">
                             <p class="text-3xl font-bold">$<span id="product_price">{{ $product->price }}</span></p>
                             <span class="w-6 h-6 block rounded-full bg-green-500"></span>
                         </span>
 
-                        <p class="font-bold text-sm text-gray-600 tracking-wider mt-5 mb-8">Choose Product Quantity</p>
+                        <p class="font-bold text-sm text-gray-600 tracking-wider mt-4 mb-8">Choose Product Quantity</p>
 
                         <div>
 
                             <input id="quantity_count" min="1"
                                 class="border-0 w-20 h-10 text-center rounded focus:ring-green-500"
                                 name="quantity"
-                                value="{{ 1 }}"
+                                value="5"
                                 type="number"><label
                                 class="ml-5 font-bold text-sm capitalize text-gray-600 tracking-wider"
                                 for="">add
                                 quantity</label>
                         </div>
                         <div class="mt-8 flex justify-between items-center mb-4">
-                            <p class="font-bold text-sm capitalize text-gray-600 tracking-wider">total</p>
+                            <p class="font-bold text-sm capitalize text-gray-600 tracking-wider">Subtotal</p>
                             <p id="show_total"
                                 class="font-extrabold text-base capitalize text-gray-800 tracking-normal">
                                 $
@@ -92,9 +92,11 @@
                             </p>
                         </div>
                         <button type="submit"
-                            class="w-full bg-green-500 py-2 text-white font-semibold text-base tracking-wide rounded">Add
+                            class="w-full bg-green-500 py-2 mb-2 text-white font-semibold text-base tracking-wide rounded">Add
                             To
                             Cart</button>
+                            <button type="submit"
+                            class="w-full border border-green-500 text-green-500 py-2   font-normal text-base tracking-wide rounded bg-slate-200">Checkout Now</button>
                     </div>
                 </form>
             </div>

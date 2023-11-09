@@ -57,4 +57,6 @@ Route::middleware(['rating'])->group(function(){
 //add to cart
 Route::middleware('addToCart')->group(function(){
     Route::post('/products/{product:id}/addToCart',[CartController::class, 'addToCart']);
+    Route::get('/home/cart',[CartController::class,'index']);
+    Route::delete('/carts/{cart:id}',[CartController::class, 'destory']);
 });
