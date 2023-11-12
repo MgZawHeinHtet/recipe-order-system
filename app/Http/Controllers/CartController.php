@@ -53,7 +53,7 @@ class CartController extends Controller
             ]); 
         } else {
             $is_product_exist_cart_item->quantity = $quantity;
-            $is_product_exist_cart_item->total += $product->price;
+            $is_product_exist_cart_item->total = $product->price*$quantity;
             $is_product_exist_cart_item->update();
         }
     }

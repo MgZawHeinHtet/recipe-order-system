@@ -1,6 +1,7 @@
 <x-layout>
 
     <section class="container">
+        
         <div class="text-center">
             <h4 class="text-3xl font-semibold">Cart</h4>
             <span class="py-2 text-slate-500">Home/Cart</span>
@@ -19,8 +20,9 @@
                         </tr>
                     </thead>
                     <tbody class="">
-                        @if ($carts)
+                        @if ($carts->first())
                             @foreach ($carts as $cart)
+                               
                                 <tr class="ring-1 ring-slate-300 rounded">
                                     <th scope="row"
                                         class="px-6 py-2  font-medium text-gray-900 whitespace-normal dark:text-white">
@@ -55,27 +57,19 @@
                                         <form action="/carts/{{ $cart->id }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="w-10 h-10"><i
-                                                    class="fa-solid fa-x"></i></button>
+                                            <button type="submit" class=""><i
+                                                    class="fa-solid fa-x text-xs"></i></button>
                                         </form>
 
                                     </td>
                                 </tr>
                             @endforeach
                         @else
-                            <tr>
-                                <td class="px-6 py-4 text-center">
-                                    <form action="/products/{{ $cart->product->id }}/addToCart" method="POST"
-                                        ">
-                                        @csrf
-                                        <button class="decrease h-8 text-lg">-</button>
-                                        <input type="text" value="" name="quantity"
-                                            class="quantity_input w-8 h-8 mx-3 focus:border-0 focus:ring-green-500">
-
-                                        <button class="increase h-8 text-lg">+</button>
-                                    </form>
-                                </td>
-                            </tr>
+                          <tr>
+                            <td class="w-full" colspan="5">
+                                <div class="flex justify-center items-center w-full border h-[600px]"> No Items in the cart</div>
+                            </td>
+                          </tr>
 
                         @endif
 
@@ -87,14 +81,18 @@
                 <h2 class="text-2xl font-bold text-slate-600 mb-8">Total</h2>
                 <div class="flex justify-between items-center">
                     <h6 class="text-normal font-bold text-slate-700 tracking-wider">Sub-Total</h6>
-                    <p class="text-slate-600 tracking-wide">${{ $cart->totalAmount() }}</p>
+                    <p class="text-slate-600 tracking-wide">${{ $carts->first() ?  $carts->first()->totalAmount() : 0 }}</p>
                 </div>
                 <div class="flex justify-between items-center">
                     <h6 class="text-lg font-bold text-slate-700">Delivery</h6>
                     <p class="text-slate-600 tracking-wide">❌</p>
+                    
                 </div>
+               
                 <div class="mt-8">
-                    <button class="w-full py-3 bg-green-500 rounded text-white text-lg">Check Out</button>
+                    <form action="/checkout" method="GET">
+                        <button class="w-full py-3 bg-green-500 rounded text-white text-lg">Check Out</button>
+                    </form>
                 </div>
                 <div class="mt-8">
                     <h4 class="text-lg text-slate-700 font-semibold">We Accept</h4>
@@ -103,22 +101,10 @@
                     </div>
                 </div>
                 <div class="mt-8">
-                    <p class="text-center text-normal text-slate-500">Get a discount, after 3 order.</p>
+                    <p class="text-center  text-normal text-slate-500">Get a discount, after 3 order. <a class="text-green-500 underline underline-offset-4" href="/">Continue Shopping</a></p>
                 </div>
             </div>
         </div>
     </section>
-    <script>
-        const increaseBtn = document.querySelector('.increase');
-        const decreaseBtn = document.querySelector('.decrease');
-        const quantityInput = document.querySelector('.quantity_input');
-        increaseBtn.addEventListener('click', function(e) {
-            e.preventDefault()
-            quantityInput.value = 1
-        })
-        decreaseBtn.addEventListener('click', function(e) {
-            e.preventDefault()
-            quantityInput.value = -1
-        })
-    </script>
+  
 </x-layout>

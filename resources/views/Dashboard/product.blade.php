@@ -135,17 +135,17 @@
                             <span class="font-bold">{{ $product->id }}</span>
                         </td>
                         <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center">
+                            class="px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white flex items-center ">
                             <img class="w-10 h-10 rounded-full" src="{{ $product->photo }}" alt="">
                             <span class="ml-2">{{ $product->title }}</span>
                         </th>
-                        <td class="px-6 py-4">
+                        <td class="px-4 py-4">
                             <span class="line-clamp-2 w-72">
                                 {{ $product->description }}
                             </span>
                         </td>
-                        <td class="px-6 py-4">
-                            {{ $product->category->name }}
+                        <td class="px-6 py-4 ">
+                            {{ $product->category?->name ??  'Deleted Category'}}
                         </td>
                         <td class="px-6 py-4">
                             ${{ $product->price }}

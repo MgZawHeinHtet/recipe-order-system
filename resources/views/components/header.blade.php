@@ -27,7 +27,7 @@
                 @endif
 
                 <li class="text-lg font-medium hover:underline decoration-green-500 decoration-4 underline-offset-8">
-                    <form action="/logout" method="post">
+                    <form action="/logout" method="POST">
                         @csrf
                         <button type="submit"> Log <i class="fa fa-sign-out" aria-hidden="true"></i> </button>
                     </form>

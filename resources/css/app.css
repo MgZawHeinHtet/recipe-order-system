@@ -6,4 +6,7 @@
     .container{
         @apply px-32
     }
+    .trans{
+        @apply transition-all duration-500
+    }
 }

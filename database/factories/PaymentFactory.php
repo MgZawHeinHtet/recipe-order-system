@@ -5,8 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
-p */
-class CategoryFactory extends Factory
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Payment>
+ */
+class PaymentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,8 +17,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'slug'=>fake()->unique()->slug(),
-            'name'=>fake()->unique()->name(),
+            //
         ];
     }
 }

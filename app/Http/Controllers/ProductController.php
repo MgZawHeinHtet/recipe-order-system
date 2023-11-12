@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('Dashboard.create');
+        return view('Dashboard.product-create');
     }
 
     /**
@@ -60,8 +60,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
        
-        return view(
-            'Dashboard.edit',
+        return view(    
+            'Dashboard.product-edit',
             [
                 'product' => $product,
                 'categories' => Category::all()
