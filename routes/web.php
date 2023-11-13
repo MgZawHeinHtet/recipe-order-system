@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ServiceController;
@@ -45,6 +47,7 @@ Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
     Route::get('',[DashboardController::class,'index']);
     Route::resource('products',ProductController::class);
     Route::resource('categories',CategoryController::class);
+    Route::resource('orders',OrderController::class);
 });
 
 //product signle page for user
@@ -70,4 +73,10 @@ Route::middleware('auth')->group(function(){
 
     //order 
     Route::post('/checkout',[CheckoutController::class, 'store']);
+
+    //create customer 
+    Route::post('/customer',[CustomerController::class,'create']);
+
+    //update customer
+    Route::patch('/customer/{customer:id}',[CustomerController::class, 'update']);
 });

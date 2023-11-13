@@ -21,31 +21,29 @@ class CheckoutController extends Controller
             'cart.checkout',
             [
                 "payments" => Payment::all(),
-                "cart_items" => auth()->user()->cart?->cart_items->load('product')
+                "cart_items" => auth()->user()->cart?->cart_items->load('product'),
+                "customer" => Customer::where('user_id',auth()->user()->id)->first()
             ]
         );
     }
 
-    public function store(CheckoutFormRequest $request)
+    public function store()
     {
 
-        $cleanData = $request->validated();
+        $customer_id = request()->customer_id;
 
         $curr_user = auth()->user();
 
-        $cleanData['user_id'] = $curr_user->id;
-        
+        if(!$customer_id){
+            return back()->with('warning','Pls fill Your Info First');
+        }
 
-        //create customer
-        $customer = Customer::create( $cleanData);
-
-       
         $order =Order::create([
-            'customer_id'=> $customer->id,
+            'customer_id'=> $customer_id,
             'order_number' => 'order-'. mt_rand(1000,9999),
             'payment_id' => request()->payment,
             'order_date' => now(),
-            'order_status' => 'pending'
+            'order_status' => 'in progress'
         ]);
 
         // swap cart item to order item 

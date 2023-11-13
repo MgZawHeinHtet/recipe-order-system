@@ -1,12 +1,11 @@
+@props(['carts'=>null])
 <x-layout>
-
     <section class="container">
         
         <div class="text-center">
             <h4 class="text-3xl font-semibold">Cart</h4>
             <span class="py-2 text-slate-500">Home/Cart</span>
         </div>
-
         <div class="grid grid-cols-3  mt-16 mb-10 gap-10">
             <div class="cart_body col-span-2">
                 <table class="w-full text-left border-separate border-spacing-y-4">
@@ -20,9 +19,9 @@
                         </tr>
                     </thead>
                     <tbody class="">
-                        @if ($carts->first())
+                        @if ($carts?->count())
                             @foreach ($carts as $cart)
-                               
+                             
                                 <tr class="ring-1 ring-slate-300 rounded">
                                     <th scope="row"
                                         class="px-6 py-2  font-medium text-gray-900 whitespace-normal dark:text-white">
@@ -67,7 +66,7 @@
                         @else
                           <tr>
                             <td class="w-full" colspan="5">
-                                <div class="flex justify-center items-center w-full border h-[600px]"> No Items in the cart</div>
+                                <div class="flex justify-center items-center w-full  h-[600px]"> No Items in the cart</div>
                             </td>
                           </tr>
 
@@ -81,11 +80,11 @@
                 <h2 class="text-2xl font-bold text-slate-600 mb-8">Total</h2>
                 <div class="flex justify-between items-center">
                     <h6 class="text-normal font-bold text-slate-700 tracking-wider">Sub-Total</h6>
-                    <p class="text-slate-600 tracking-wide">${{ $carts->first() ?  $carts->first()->totalAmount() : 0 }}</p>
+                    <p class="text-slate-600 tracking-wide">${{ $carts ? $carts->sum('total') : 0 }}</p>
                 </div>
                 <div class="flex justify-between items-center">
                     <h6 class="text-lg font-bold text-slate-700">Delivery</h6>
-                    <p class="text-slate-600 tracking-wide">❌</p>
+                    <p class="text-slate-600 tracking-wide">free</p>
                     
                 </div>
                

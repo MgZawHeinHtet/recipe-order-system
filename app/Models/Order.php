@@ -18,4 +18,8 @@ class Order extends Model
     public function orderItems(){
         return $this->hasMany(OrderItems::class);
     }
+
+    public function payment(){
+        return $this->belongsTo(Payment::class);
+    }
 }

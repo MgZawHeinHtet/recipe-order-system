@@ -3,7 +3,7 @@ import "./bootstrap";
 const inputCount = document.querySelector("#quantity_count");
 const total = document.querySelector("#show_total");
 const price = document.querySelector("#product_price");
-const payments = document.forms["checkout"].elements["payment"];
+const payments = document.querySelectorAll('.payment_check');
 const checkoutBtn = document.querySelector(".checkout-btn");
 const paymentForm = document.querySelector(".payment-form");
 
