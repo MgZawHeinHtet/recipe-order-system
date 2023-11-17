@@ -113,7 +113,7 @@
                         @foreach ($payments as $payment)
                             <div class="mt-1">
                                 <input
-                                    class="payment-check checked:bg-green-500 checked:outline-green-600 checked:ring-0"
+                                    class="payment_check checked:bg-green-500 checked:outline-green-600 checked:ring-0"
                                     id="{{ $payment->id }}" type="radio" name="payment" value="{{ $payment->id }}"
                                     {{ $payment->id === 1 ? 'checked' : '' }} />
                                 <x-error name="payment"></x-error>

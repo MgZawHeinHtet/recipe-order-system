@@ -1,4 +1,4 @@
-<div class="card group/card space-y-5 shadow-xl rounded-lg transition-all duration-1000">
+<div class="card group/card space-y-5 shadow-xl rounded-xl overflow-hidden transition-all duration-1000">
     <div class="img_container relative bg-[url('../assets/home_page/bg-paint.png')] w-full bg-no-repeat bg-contain bg-left-top">
         <img class="w-full h-40 block mx-auto rounded object-cover" src="{{ $product->photo }}" alt="">
         <div class="w-full rounded h-full absolute top-0 hidden  items-center justify-center flex-col backdrop-blur-sm group-hover/card:visible group-hover/card:flex">

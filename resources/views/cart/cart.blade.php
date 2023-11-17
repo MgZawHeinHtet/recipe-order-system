@@ -24,7 +24,7 @@
                              
                                 <tr class="ring-1 ring-slate-300 rounded">
                                     <th scope="row"
-                                        class="px-6 py-2  font-medium text-gray-900 whitespace-normal dark:text-white">
+                                        class="px-6 py-2  font-medium text-gray-900 whitespace-normal ">
                                         <div class="flex gap-x-6 items-center">
                                             <img class="object-cover h-20" src="{{ $cart->product->photo }}"
                                                 width="60" height="500" alt="">

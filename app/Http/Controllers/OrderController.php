@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -36,9 +37,12 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Order $order)
     {
-        //
+        return view('Dashboard.order-detail',[
+            'order'=> $order,
+            'orderStatuses' => OrderStatus::all()
+        ]);
     }
 
     /**
@@ -52,9 +56,11 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update( Order $order)
     {
-        //
+        $order->order_status= request('status');
+        $order->update();
+        return back();
     }
 
     /**

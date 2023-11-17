@@ -15,11 +15,15 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function orderItems(){
+    public function order_items(){
         return $this->hasMany(OrderItems::class);
     }
 
     public function payment(){
         return $this->belongsTo(Payment::class);
+    }
+
+    public function order_status(){
+        return $this->belongsTo(OrderStatus::class);
     }
 }

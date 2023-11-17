@@ -15,38 +15,45 @@ class CartController extends Controller
     {
         return view(
             'cart.cart',
-            ["carts" => auth()->user()->cart?->cart_items->load('product')],
+            ["carts" => auth()->user()?->cart->cart_items->load('product')],
             ["categories"=>Category::all('name')]
         );
     }
 
     public function addToCart(Product $product)
     {
+        
         $quantity = request()->quantity;
         $curr_user = auth()->user();
         $curr_user_id = $curr_user->id;
 
         //ONLY CREATE IF THE USER_ID DOES'T HAVE ON CART
-        Cart::firstOrCreate([
+        $cart = Cart::firstOrCreate([
             'user_id' => $curr_user_id
         ]);
 
+        //to use model
+        if(!$curr_user->cart_id){
+            $curr_user->cart_id = $cart->id;
+            $curr_user->update();
+        }
+
         //CALL BACK
-        $this->add_product_to_cart_item($curr_user, $product, $quantity);
+        $this->add_product_to_cart_item( $product, $quantity,$cart);
 
         return back();
     }
 
-    public function add_product_to_cart_item($user, $product, $quantity)
+    public function add_product_to_cart_item( $product, $quantity,$cart)
     {
-        $user_cart = $user->cart;
-
+      
+        
         //PRODUCT ID IS ALREADY EXIT IN CART_ITEM TABLES
-        $is_product_exist_cart_item = CartItem::where('product_id', $product->id)->where('cart_id', $user_cart->id)->first();
+        $is_product_exist_cart_item = CartItem::where('product_id', $product->id)->where('cart_id', $cart->id)->first();
 
         if (!$is_product_exist_cart_item) {
             CartItem::create([
-                'cart_id' => $user_cart->id,
+                'cart_id' => $cart->id,
                 'product_id' => $product->id,
                 'quantity' => $quantity,
                 'total'=>$product->price

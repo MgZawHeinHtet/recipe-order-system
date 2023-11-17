@@ -8,7 +8,9 @@ use App\Models\CartItem;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItems;
+use App\Models\OrderStatus;
 use App\Models\Payment;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\CssSelector\Node\FunctionNode;
@@ -40,10 +42,10 @@ class CheckoutController extends Controller
 
         $order =Order::create([
             'customer_id'=> $customer_id,
-            'order_number' => 'order-'. mt_rand(1000,9999),
+            'order_number' => Str::random(6),
             'payment_id' => request()->payment,
             'order_date' => now(),
-            'order_status' => 'in progress'
+            'order_status' => OrderStatus::find(1)->status
         ]);
 
         // swap cart item to order item 

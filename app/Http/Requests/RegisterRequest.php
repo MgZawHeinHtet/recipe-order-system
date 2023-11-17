@@ -26,16 +26,11 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'username' => 'required|unique:users,username',
+            // 'username' => 'required|unique:users,username',
             'email'=>'required|email|unique:users,email',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'confirm-password' => 'required'
         ];
     }
-    public function failedValidation(ValidationValidator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'success'=>'false',
-            'errors'=>$validator->errors()
-        ]));
-    }
+  
 }

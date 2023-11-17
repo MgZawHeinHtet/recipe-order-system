@@ -7,6 +7,7 @@ const payments = document.querySelectorAll('.payment_check');
 const checkoutBtn = document.querySelector(".checkout-btn");
 const paymentForm = document.querySelector(".payment-form");
 
+
 if (inputCount) {
     inputCount.addEventListener("change", function () {
         total.innerText =
@@ -20,6 +21,7 @@ for (let payment of payments) {
         if ((payment.id == 1)) {
             checkoutBtn.removeAttribute('disabled');
             paymentForm.classList.add("hidden");
+            console.log(payment.id)
         } else if (payment.id == 2) {
             checkoutBtn.setAttribute('disabled', '');
             paymentForm.classList.remove("hidden");

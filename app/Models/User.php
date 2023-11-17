@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Cart;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,10 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin'
+    ];
+
+    protected $guarded = [
+        'id'
     ];
 
     /**
@@ -46,20 +51,41 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function ratedProducts(){
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->username = Str::replace(' ','-',$user->name) ;
+            $user->img = asset('assets/nav_logo.png');
+            $user->gender = 'none';
+            $user->dob = '?/?/?';
+           
+        });
+    }
+
+    public function ratedProducts()
+    {
         return $this->belongsToMany(Product::class);
-    }   
-
-    public function userRatingOnProduct($id){
-        return $this->ratedProducts()->withPivot('rate')->where('product_id',$id)->first()?->pivot->rate;
     }
 
-    public function isRating($product){
-        return $this->ratedProducts->contains('id',$product->id);
+    public function userRatingOnProduct($id)
+    {
+        return $this->ratedProducts()->withPivot('rate')->where('product_id', $id)->first()?->pivot->rate;
     }
 
-    public function cart(){
-        return $this->belongsTo(Cart::class,'id');
+    public function isRating($product)
+    {
+        return $this->ratedProducts->contains('id', $product->id);
+    }
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
 
 }

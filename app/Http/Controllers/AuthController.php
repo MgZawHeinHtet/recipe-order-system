@@ -26,9 +26,22 @@ class AuthController extends Controller
     }
 
     //register
-    public function register(RegisterRequest $request){
-            User::create($request->validated());
-            return response()->json(['status'=>'success','msg'=>'created successfully']);
+    public function register(){
+        return view('Auth.signup');
+    }
+
+    public function signup(RegisterRequest $request){
+        $cleanData = $request->validated();
+        $isSame = $cleanData['password'] === $cleanData['confirm-password'];
+        
+        if(!$isSame){
+            return back()->withErrors(['confirm-password'=>'Must be same with password'])->withInput();
+        }
+
+        $cleanData['confirm-password'] = '';
+
+        User::create($cleanData);
+        return redirect('/login');
     }
 
    public function logout(){

@@ -1,14 +1,13 @@
 <x-admin-layout>
   
     <div class="flex justify-between items-center text-normal font-normal capitalize ">
-        <h2 class="text-3xl text-slate-800 font-bold">Products Managment</h2>
+        <h2 class="text-3xl text-slate-400 font-bold">Products Managment</h2>
         <div>
             <a class="block rounded  bg-green-500 w-44 py-3 text-center hover:bg-green-700 transition-all duration-150 text-white"
                 href="/dashboard/products/create  "> <i class="fa-solid fa-plus text-white"></i> Add Product</a>
         </div>
     </div>
 
-    <hr class="w-full border-dashed border-2  border-slate-500">
    <x-alert></x-alert>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="flex items-center justify-between pb-4">
