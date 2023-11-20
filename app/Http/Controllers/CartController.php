@@ -15,7 +15,7 @@ class CartController extends Controller
     {
         return view(
             'cart.cart',
-            ["carts" => auth()->user()?->cart->cart_items->load('product')],
+            ["cart" => Cart::where('user_id',auth()->user()->id)->first()],
             ["categories"=>Category::all('name')]
         );
     }

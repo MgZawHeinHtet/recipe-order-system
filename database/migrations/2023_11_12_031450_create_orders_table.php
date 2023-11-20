@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('order_number');
             $table->unsignedBigInteger('payment_id');
             $table->date('order_date');
-            $table->string('order_status');
+            $table->string('order_status_id');
             $table->timestamps();
         });
     }

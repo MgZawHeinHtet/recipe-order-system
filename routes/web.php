@@ -12,8 +12,9 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileOrderController;
 use App\Http\Controllers\RatingController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ProfileRatedController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
@@ -68,8 +69,9 @@ Route::middleware(['auth'])->prefix('profile')->group(function(){
    Route::resource('user',ProfileController::class);
    Route::patch('user/{user:id}/password',[ChangePasswordController::class,'update']);
    Route::resource('notifications',NotificationController::class);
-
    Route::post('notifications/read',[NotificationController::class, 'makeAllRead']);
+   Route::get('ratedProduct',[ProfileRatedController::class, 'index']);
+   Route::get('orders',[ProfileOrderController::class,'index']);
 });
 
 //product signle page for user
@@ -100,5 +102,7 @@ Route::middleware('auth')->group(function(){
 
     //update customer
     Route::patch('/customer/{customer:id}',[CustomerController::class, 'update']);
+
+    Route::get('/checkout/orderSuccess',[CheckoutController::class,'success']);
 
 });

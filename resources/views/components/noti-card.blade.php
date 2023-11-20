@@ -18,7 +18,7 @@
         <div id="dropdown"
             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-36 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                <li>
+                <li class="{{ $notification->is_read ? 'hidden' : '' }}">
                     <form action="/profile/notifications/{{ $notification->id }}" method="POST">
                         @csrf
                         @method('PATCH')

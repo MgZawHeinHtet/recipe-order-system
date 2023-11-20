@@ -60,7 +60,7 @@ class OrderController extends Controller
     public function update( Order $order)
     {   
         subscriber::sendNotification('change-order-status');
-        $order->order_status= request('status');
+        $order->order_status_id= request('status');
         $order->update();
         return back();
     }

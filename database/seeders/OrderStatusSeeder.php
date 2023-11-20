@@ -15,10 +15,11 @@ class OrderStatusSeeder extends Seeder
     public function run(): void
     {
         $status = [
-            ['status'=>'in progress'],
-            ['status'=>'placement'],
-            ['status'=>'shipping'],
             ['status'=>'pending'],
+            ['status'=>'processing'],
+            ['status'=>'processed'],
+            ['status'=>'shipped'],
+            ['status'=>'delivery'],
             ['status'=>'complete'],
         ];
        foreach($status as $s){

@@ -45,7 +45,7 @@ class CheckoutController extends Controller
             'order_number' => Str::random(6),
             'payment_id' => request()->payment,
             'order_date' => now(),
-            'order_status' => OrderStatus::find(1)->status
+            'order_status_id' => 1
         ]);
 
         // swap cart item to order item 
@@ -62,6 +62,10 @@ class CheckoutController extends Controller
             $cartItem->delete();
         }
         
-        return redirect('/home/cart')->with('success','Order Successfully');
+        return redirect('/checkout/orderSuccess')->with('success','Order Successfully');
+    }
+
+    public function success(){
+        return view('order-success');
     }
 }

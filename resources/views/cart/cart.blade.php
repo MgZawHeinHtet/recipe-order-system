@@ -1,4 +1,9 @@
-@props(['carts'=>null])
+@props(['cart'=>null])
+
+@php
+    $carts = $cart?->cart_items
+@endphp
+
 <x-layout>
     <section class="container">
         

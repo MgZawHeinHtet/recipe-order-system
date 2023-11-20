@@ -30,12 +30,12 @@
                 </a>
             </li>
             <li>
-                <a class="font-bold text-base text-gray-800" href="">
+                <a class="font-bold text-base text-gray-800" href="/profile/orders">
                     Order Lists
                 </a>
             </li>
             <li>
-                <a class="font-bold text-base text-gray-800" href="">
+                <a class="font-bold text-base text-gray-800" href="/profile/ratedProduct">
                     Rated Products
                 </a>
             </li>
