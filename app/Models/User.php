@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Cart;
+use App\Models\Subscriber;
+use App\Models\Notification;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
@@ -87,5 +89,16 @@ class User extends Authenticatable
     public function reviews(){
         return $this->hasMany(Review::class);
     }
+    
+    public function subscriber(){
+        return $this->belongsTo(Subscriber::class);
+    }
 
+    public function notifications(){
+        return $this->hasMany(Notification::class);
+    }
+
+    public function unreadNoti(){
+        return $this->notifications()->where('is_read',false);
+    }
 }

@@ -124,13 +124,13 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800">
                         <td class="px-6">
                             <span class="font-bold">{{ $user->id }}</span>
                         </td>
                         <th scope="row"
                             class="px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white flex items-center ">
-                            <img class="w-10 h-10 rounded-full" src="{{ $user->img }}" alt="">
+                            <img class="w-10 h-10 rounded-full object-cover" src="{{ $user->img }}" alt="">
                             <span class="ml-2">{{ $user->name }}</span>
                         </th>
                         <td class="px-4 py-4">

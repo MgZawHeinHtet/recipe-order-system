@@ -4,8 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ProductController;
 use App\Models\Basket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Mockery\Expectation;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +25,24 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::post('/login',[AuthController::class,'login']);
-
-Route::post('/signup',[AuthController::class, 'register']);
-
-Route::apiResource('products',ProductController::class);
-
-Route::post('/cart',[BasketController::class,'store']);
-
-Route::get('/user',[AuthController::class, 'getUser']);
+Route::get('/users',function(){
+    try{
+        if(request('is_admin')===true){
+            return [
+                'users' => User::all(),
+                'status' => 200
+            ] ;
+        }else{
+            return [
+                'msg'=> 'unauthorized access',
+                'status'=> 403
+            ];
+        }
+    }catch(ErrorException $e){
+        return [
+            'err'=>$e->getMessage(),
+            'status'=>500
+        ];
+    }
+   
+});

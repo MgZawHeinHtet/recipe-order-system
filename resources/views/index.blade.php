@@ -17,6 +17,4 @@
     {{-- subscribe sectin  --}}
     <x-subscribe></x-subscribe>
 
- 
-
 </x-layout>

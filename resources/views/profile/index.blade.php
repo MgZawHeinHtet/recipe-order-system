@@ -1,6 +1,6 @@
 <x-profile-layout>
-
-    <div class="space-y-5 relative">
+    <x-alert class="mb-5"></x-alert>
+    <div class="space-y-5 mt-8 relative">
         <h6 class="uppercase text-sm font-semibold text-gray-800">Personal Setting /</h6>
         <h4 class="text-4xl font-bold text-gray-900 tracking-wide">Account</h4>
 
@@ -11,7 +11,7 @@
         </div>
 
         {{-- profile-show  --}}
-        <div class="profile-show hidden">
+        <div class="profile-show ">
 
             <div class="mb-10 flex gap-10 items-center">
                 <div><img class="w-36 h-36 rounded-full shadow object-cover ring-1 p-3 ring-green-500"
@@ -58,7 +58,7 @@
         </div>
 
         {{-- edit setting  --}}
-        <div class="profile-edit ">
+        <div class="profile-edit hidden">
             <form action="/profile/user/{{ $user->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
@@ -147,26 +147,31 @@
             <p class="text-gray-700">Update your password associated with your account.</p>
         </div>
         <div class="col-span-2">
-            <form class="space-y-5" action="">
+            <form class="space-y-5" action="/profile/user/{{ $user->id }}/password" method="POST">
+                @csrf
+                @method('PATCH')
                 <div>
                     <label class="block text-base font-semibold tracking-wide mb-3" for="">Current
                         password</label>
-                    <input class="w-full outline-none ring-1 ring-slate-400 focus:ring-green-500 py-2 rounded-lg px-4"
+                    <input name="current-password" value="{{ old('current-password') }}" class="w-full outline-none ring-1 ring-slate-400 focus:ring-green-500 py-2 rounded-lg px-4"
                         type="password">
+                        <x-error name="current-password"></x-error>
                 </div>
                 <div>
                     <label class="block text-base font-semibold tracking-wide mb-3" for="">New password</label>
-                    <input class="w-full outline-none ring-1 ring-slate-400 focus:ring-green-500 py-2 rounded-lg px-4"
+                    <input value="{{ old('new-password') }}" name="new-password" class="w-full outline-none ring-1 ring-slate-400 focus:ring-green-500 py-2 rounded-lg px-4"
                         type="password">
+                        <x-error name="new-password"></x-error>
                 </div>
                 <div>
-                    <label class="block text-base font-semibold tracking-wide mb-3" for="">Confirm
+                    <label name="confirm-password" class="block text-base font-semibold tracking-wide mb-3" for="">Confirm
                         password</label>
-                    <input class="w-full outline-none ring-1 ring-slate-400 focus:ring-green-500 py-2 rounded-lg px-4"
+                    <input name="confirm-password" value="{{ old('confirm-password') }}" class="w-full outline-none ring-1 ring-slate-400 focus:ring-green-500 py-2 rounded-lg px-4"
                         type="password">
+                        <x-error name="confirm-password"></x-error>
                 </div>
                 <div>
-                    <button class="px-6 py-2 bg-green-500 rounded-lg text-white font-bold">Save</button>
+                    <button type="submit" class="px-6 py-2 bg-green-500 rounded-lg text-white font-bold">Save</button>
                 </div>
             </form>
         </div>

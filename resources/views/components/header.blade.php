@@ -46,35 +46,51 @@
                     <span class="sr-only">Notifications</span>
                     <div
                         class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 ">
-                        {{ auth()->check()&&auth()->user()->cart? auth()->user()->cart->cart_items->count(): 0 }}
+                        {{ auth()->check() && auth()->user()->cart? auth()->user()->cart->cart_items->count(): 0 }}
 
                     </div>
                 </a>
             </div>
             @auth
-            <div class="dropdown">
-                <span class="rounded-full"><img class="w-10 h-10 p-1 rounded-full object-cover ring-2 ring-gray-300 dark:ring-green-500" src="{{ auth()->user()->img }}" alt=""></span>
-                <div class="dropdown-content rounded-xl">
-                  <p class="text-white">{{ auth()->user()->name }}</p>
-                  <hr class="my-2">
-                  <div class="my-2">
-                    <a class="gap-x-10 py-2" href="/profile/user"><i class="fa-solid fa-user text-xl text-white"></i> <span class="text-white ml-5">Profile</span></a>
-                  </div>
-                  <div class="my-2">
-                    <a class="gap-x-10 py-2" href=""><i class="fa-solid fa-bell text-xl text-white"></i> <span class="text-white ml-5">Notification</span></a>
-                  </div>
-                  <div class="my-2">
-                    <a class="gap-x-10 py-2" href=""><i class="fa-solid fa-clock text-xl text-white"></i> <span class="text-white ml-5">Order History</span></a>
-                  </div>
-                  <hr class="my-2">
-                  <form action="/logout" method="POST">
-                    @csrf
-                    <button class="text-white" type="submit"> Log <i class="fa fa-sign-out" aria-hidden="true"></i> </button>
-                </form>
+                <div class="dropdown">
+                    <span class="relative rounded-full"><img
+                            class="w-10 h-10 p-1 rounded-full object-cover ring-2 ring-gray-300 dark:ring-green-500"
+                            src="{{ auth()->user()->img }}" alt="">
+                        @if($noti = auth()->user()->unreadNoti()->count())
+                        <div
+                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 ">
+                            {{ $noti }}
+
+                        </div>
+                        @endif
+                    </span>
+                    <div class="dropdown-content rounded-xl">
+                        <p class="text-white">{{ auth()->user()->name }}</p>
+                        <hr class="my-2">
+                        <div class="my-2">
+                            <a class="gap-x-10 py-2" href="/profile/user"><i
+                                    class="fa-solid fa-user text-xl text-white"></i> <span
+                                    class="text-white ml-5">Profile</span></a>
+                        </div>
+                        <div class="my-2">
+                            <a class="gap-x-10 py-2" href="/profile/notifications"><i class="fa-solid fa-bell text-xl text-white"></i>
+                                <span class="text-white ml-5">Notification <span
+                                        class="{{ !$noti ? 'hidden':'' }} w-5 h-5  inline-block text-center  rounded-full bg-red-500 text-white text-sm">{{ $noti ?? 0 }}</span></span></a>
+                        </div>
+                        <div class="my-2">
+                            <a class="gap-x-10 py-2" href=""><i class="fa-solid fa-clock text-xl text-white"></i>
+                                <span class="text-white ml-5">Order History</span></a>
+                        </div>
+                        <hr class="my-2">
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <button class="text-white" type="submit"> Log <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
-              </div>
             @endauth
-           
+
         </div>
     </nav>
 </header>

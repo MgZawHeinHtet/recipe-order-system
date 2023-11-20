@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\OrderStatus;
 use App\Models\subscriber;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class SubscriberController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('Dashboard.order',[
-            'orders' => Order::with('customer','payment')->latest()->paginate(10)
+        return view('Dashboard.subscriber.index',[
+            'subscribers' => Subscriber::latest()->paginate(10)
         ]);
     }
 
@@ -24,7 +22,13 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $cleanData = request()->validate([
+            'email' => ['required','email','unique:subscribers,email']
+        ]);
+        $cleanData['user_id'] = auth()->user()->id;
+        
+        subscriber::create($cleanData);
+        return back();
     }
 
     /**
@@ -38,18 +42,15 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show(subscriber $subscriber)
     {
-        return view('Dashboard.order-detail',[
-            'order'=> $order,
-            'orderStatuses' => OrderStatus::all()
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(subscriber $subscriber)
     {
         //
     }
@@ -57,19 +58,17 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( Order $order)
-    {   
-        subscriber::sendNotification('change-order-status');
-        $order->order_status= request('status');
-        $order->update();
-        return back();
+    public function update(Request $request, subscriber $subscriber)
+    {
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(subscriber $subscriber)
     {
-        //
+        $subscriber->delete();
+        return back()->with('delete','Remove Subscriber Successfully💥');
     }
 }

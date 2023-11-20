@@ -92,6 +92,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/dashboard/subscribers"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <img class="w-6 h-6" src="{{ asset('assets/subscribe.png') }}" alt="">
+                        <span class="flex-1 ml-3 whitespace-nowrap">Subscribers</span>
+                    </a>
+                </li>
+                <li>
                     <form action="/logout" method="POST">
                         @csrf
                         <button type="submit"

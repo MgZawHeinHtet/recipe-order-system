@@ -12,7 +12,8 @@ class HomeController extends Controller
         return view('index',[
             'products' => Product::orderBy('rating','asc')->take(10)->get(),
             'services' => $this->getService(),
-            'reviews' => Review::with('user')->latest()->get()
+            'reviews' => Review::with('user')->latest()->get(),
+          
         ]);
     }
       //get data for service section hard data

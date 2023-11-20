@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Models\Notification;
 use App\Models\Product;
+use App\Models\subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Validation\Rule;
+
 
 class ProductController extends Controller
 {
@@ -34,6 +36,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        //add notification to subscriber
+       subscriber::sendNotification('add-product');
 
         $cleanData = $request->validated();
 
@@ -59,7 +63,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-       
+
         return view(    
             'Dashboard.product-edit',
             [
@@ -74,6 +78,8 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+        subscriber::sendNotification('update-product');
+
         $cleanData = $request->validated();
         if($request->photo){
            
@@ -96,6 +102,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        subscriber::sendNotification('delete-product');
+
         $product->delete();
         return back()->with('delete', 'Delete Successfully! 🎆');
     }

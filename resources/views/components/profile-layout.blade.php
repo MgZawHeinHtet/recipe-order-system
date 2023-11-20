@@ -16,7 +16,7 @@
         <ul class="space-y-2 font-medium">
             <p class="text-gray-600 text-sm mb-4 tracking-wider font-semibold uppercase">Presonal Setting</p>
             <li>
-                <a class="font-bold text-gray-900" href="">
+                <a class="font-bold text-gray-900" href="/profile/user">
                     Account
                 </a>
             </li>
@@ -25,7 +25,7 @@
         <ul class="space-y-2 font-medium">
             <p class="text-gray-600 text-sm mb-4 tracking-wider font-semibold uppercase">Tools and operation</p>
             <li>
-                <a class="font-bold text-base text-gray-800" href="">
+                <a class="font-bold text-base text-gray-800" href="/profile/notifications">
                     Notifications
                 </a>
             </li>
@@ -43,10 +43,11 @@
     </aside>
 
     <div class="sm:ml-96">
-        <div class="p-20">
+        <div class="p-20 py-16">
             {{ $slot }}
         </div>
     </div>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
 
+</body>
 </html>

@@ -3,15 +3,18 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
 use App\Models\Profile;
@@ -52,12 +55,21 @@ Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
     Route::resource('products',ProductController::class);
     Route::resource('categories',CategoryController::class);
     Route::resource('orders',OrderController::class);
+    Route::resource('subscribers',SubscriberController::class);
     Route::get('users',[UserController::class,'dashboard_index']);
 });
 
-//profile dashboard product Route
+Route::middleware('auth')->group(function(){
+    Route::post('subscribe',[SubscriberController::class, 'create']);
+});
+
+//profile dashboard proile Route
 Route::middleware(['auth'])->prefix('profile')->group(function(){
    Route::resource('user',ProfileController::class);
+   Route::patch('user/{user:id}/password',[ChangePasswordController::class,'update']);
+   Route::resource('notifications',NotificationController::class);
+
+   Route::post('notifications/read',[NotificationController::class, 'makeAllRead']);
 });
 
 //product signle page for user
