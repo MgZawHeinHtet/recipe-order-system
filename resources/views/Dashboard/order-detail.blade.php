@@ -3,7 +3,7 @@
         <div class="grid grid-cols-3 gap-7">
             <div class="col-span-2 space-y-5">
                 <h2 class="text-xl text-slate-400 font-bold">Order Number <span
-                        class="text-green-500">#{{ $order->order_number }}</span></h2>
+                        class="text-green-500">{{ $order->order_number }}</span></h2>
 
                 <table class="w-full bg-gray-900  ring-1 ring-gray-800 rounded-lg text-left">
                     <thead>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="flex justify-between items-center py-4 border-b border-gray-800">
                         <h6 class="font-semibold text-sm text-slate-400">Order Status</h6>
-                        <p class="text-green-400">{{ $order->order_status_id }}</p>
+                        <p class="text-green-400">{{ $order->order_status->status }}</p>
                     </div>
                     <div class="flex justify-between items-center py-4  border-gray-800">
                         <h6 class="font-semibold text-sm text-slate-400">Payment Method</h6>
@@ -81,7 +81,7 @@
                                 <select
                                     name="status"
                                     class="py-3 px-4 block w-full bg-gray-800 text-green-500 border-transparent rounded-lg text-sm focus:border-green-700 focus:ring-green-700 disabled:opacity-50 disabled:pointer-events-none">
-                                    <option hidden selected>{{ $order->order_status_id }}</option>
+                                    <option hidden selected>{{ $order->order_status->status }}</option>
                                     @foreach ($orderStatuses as $status )
                                         <option value="{{ $status->id }}">{{ $status->status }}</option>
                                     @endforeach

@@ -24,8 +24,16 @@ class subscriber extends Model
             Notification::create([
                 'user_id' => $subscriber->user_id,
                 'noti_type' => $type,
-                'recipent_id'=>auth()->user()->id
+                'recipent_id'=>1
             ]);
         }
+    }
+
+    public function scopeSendNotiByOrderPerson($_,$type,$user_id){
+        Notification::create([
+            'user_id' => $user_id,
+            'noti_type' => $type,
+            'recipent_id'=> 1
+        ]);
     }
 }

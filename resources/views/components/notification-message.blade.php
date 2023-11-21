@@ -19,3 +19,8 @@
     <span>Your Order status was changed by</span>
     <span>{{ $recipent }}</span>
 @endif
+
+@if($type === 'order-success')
+    <span>Your Order  was successed by</span>
+    <span>{{ $recipent }}</span>
+@endif

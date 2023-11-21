@@ -49,7 +49,7 @@
                     {{ $order->order_date }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $order->order_status->id }}
+                    {{ $order->order_status->status }}
                 </td>
                 <td class="px-6 py-4">
                     <a href="/dashboard/orders/{{ $order->id }}" class="font-medium text-green-600 dark:text-green-500 hover:underline">View</a>

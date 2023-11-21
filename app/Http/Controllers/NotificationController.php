@@ -13,9 +13,17 @@ class NotificationController extends Controller
      */
     public function index()
     {
+        $notifications = auth()->user()->notifications()->with(['user','recipent'])->get();
+        $unread_notifications = $notifications->filter(function($noti){
+            return $noti->is_read == false;
+        });
+        $read_notifications = $notifications->filter(function($noti){
+            return $noti->is_read == true;
+        });
+       
         return view('profile.noti',[
-            'unread_notifications' => auth()->user()->notifications()->where('is_read',false)->latest()->get(),
-            'read_notifications' => auth()->user()->notifications()->where('is_read',true)->latest()->get()
+            'unread_notifications' => $unread_notifications,
+            'read_notifications' => $read_notifications,
         ]);
     }
 
@@ -65,8 +73,9 @@ class NotificationController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Notification $notification)
-    {
+    {   
         $notification->delete();
+        
         return back();
     }
 

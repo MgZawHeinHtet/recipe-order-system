@@ -101,4 +101,5 @@ class User extends Authenticatable
     public function unreadNoti(){
         return $this->notifications()->where('is_read',false);
     }
+
 }

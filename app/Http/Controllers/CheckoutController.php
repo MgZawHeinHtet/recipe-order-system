@@ -6,12 +6,14 @@ use App\Http\Requests\CheckoutFormRequest;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Customer;
+use App\Models\Notification as ModelsNotification;
 use App\Models\Order;
 use App\Models\OrderItems;
-use App\Models\OrderStatus;
+use App\Models\Notification;
 use App\Models\Payment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
@@ -42,7 +44,7 @@ class CheckoutController extends Controller
 
         $order =Order::create([
             'customer_id'=> $customer_id,
-            'order_number' => Str::random(6),
+            'order_number' => '#N@ture-'. Str::random(6),
             'payment_id' => request()->payment,
             'order_date' => now(),
             'order_status_id' => 1
@@ -61,6 +63,14 @@ class CheckoutController extends Controller
             ]);
             $cartItem->delete();
         }
+
+        //send user noti to now success
+        Notification::create([
+            'user_id'=> $curr_user->id,
+            'noti_type' => 'order-success',
+            'is_read'=> false,
+            'recipent_id'=> 1
+        ]);
         
         return redirect('/checkout/orderSuccess')->with('success','Order Successfully');
     }

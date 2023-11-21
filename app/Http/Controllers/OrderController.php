@@ -59,7 +59,7 @@ class OrderController extends Controller
      */
     public function update( Order $order)
     {   
-        subscriber::sendNotification('change-order-status');
+        subscriber::sendNotiByOrderPerson('change-order-status',$order->customer->user_id);
         $order->order_status_id= request('status');
         $order->update();
         return back();

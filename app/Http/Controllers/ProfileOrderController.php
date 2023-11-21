@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class ProfileOrderController extends Controller
             
          };
         return view('profile.order-lists',[
-            'order'=>$order
+            'order'=>$order,
+            'orders'=>Customer::where('user_id',auth()->user()->id)->first()?->orders()->with('payment','customer','order_status')->paginate(10)
         ]);
     }
 }

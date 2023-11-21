@@ -11,7 +11,7 @@ class Customer extends Model
 
     protected  $guarded = ['id'];
 
-    public function order(){
-        return $this->belongsTo(Order::class);
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
 }

@@ -66,12 +66,13 @@ Route::middleware('auth')->group(function(){
 
 //profile dashboard proile Route
 Route::middleware(['auth'])->prefix('profile')->group(function(){
+    Route::resource('notifications',NotificationController::class);
    Route::resource('user',ProfileController::class);
    Route::patch('user/{user:id}/password',[ChangePasswordController::class,'update']);
-   Route::resource('notifications',NotificationController::class);
    Route::post('notifications/read',[NotificationController::class, 'makeAllRead']);
    Route::get('ratedProduct',[ProfileRatedController::class, 'index']);
    Route::get('orders',[ProfileOrderController::class,'index']);
+   
 });
 
 //product signle page for user

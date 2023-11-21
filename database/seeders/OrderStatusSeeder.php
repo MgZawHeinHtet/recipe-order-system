@@ -17,7 +17,6 @@ class OrderStatusSeeder extends Seeder
         $status = [
             ['status'=>'pending'],
             ['status'=>'processing'],
-            ['status'=>'processed'],
             ['status'=>'shipped'],
             ['status'=>'delivery'],
             ['status'=>'complete'],
