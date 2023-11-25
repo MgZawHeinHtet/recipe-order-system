@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
       
         $this->call([
             PaymentSeeder::class,
-            OrderStatusSeeder::class
+            OrderStatusSeeder::class,
+            OrderStatusSeeder::class,
+            ReviewSeeder::class
         ]);
 
         User::create([

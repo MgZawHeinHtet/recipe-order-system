@@ -23,7 +23,10 @@ class ProductFactory extends Factory
             'description' => fake()->paragraph(),
             'photo'=>fake()->imageUrl(),
             'price'=>fake()->randomNumber(4),
-            'category_id' => Category::factory()
+            'category_id' => Category::factory(),
+            'ingredients' => 'banana,mango,tomato',
+            'country' => fake()->country(),
+            
         ];
     }
 }

@@ -1,15 +1,26 @@
 <x-layout>
-
+   
 
     <section class="container py-16 bg-slate-50">
         <div class="flex gap-5">
             <div class="product_img w-[35%]">
                 <img class="w-full h-[400px] object-cover rounded" src="{{ $product->photo }}" alt="">
             </div>
+
             <div class="product_content w-[45%] space-y-3">
-                <h2 class="text-3xl font-bold mb-8">
+                <h2 class="text-3xl font-bold mb-4">
                     {{ $product->title }} <span class="text-sm underline text-green-500">(Spanish)</span>
+                   
                 </h2>
+
+                <div>
+                    @if ($product->stock <1)
+                    <h4 class="text-lg text-red-500 italic line-through">Out Of Stock</h4>
+
+                    @else
+                    <h4 class="text-lg text-slate-900 itali">In Stock - <span >{{ $product?->stock }}</span></h4>
+                    @endif
+                </div>
 
                 <p class="text-base font-light tracking-wide text-justify">
                     {{ $product->description }}
@@ -17,8 +28,8 @@
                 <div class="Ingredients mb-10 ring-1 ring-slate-300 py-3 px-5 rounded-lg">
                     <h6 class="text-lg  font-bold mb-3 tracking-wide">Ingredients</h6>
                     <div class="grid grid-cols-3 gap-x-5">
-                        @for ($i = 0; $i < 8; $i++)
-                            <div><span class="text-base font-thin tracking-wide">valgina frui</span></div>
+                        @for ($i = 0; $i < count($ingredients); $i++)
+                            <div><span class="text-base font-thin tracking-wide">{{ $ingredients[$i] }}</span></div>
                         @endfor
                     </div>
                 </div>
@@ -29,7 +40,7 @@
                     <form action="/products/{{ $product->id }}/rating" method="POST" onchange="submit()">
                         @csrf
                         <h6 class="text-3xl text-slate-600 font-bold tracking-wide">Give Rating Product</h6>
-                        <span class="flex gap-6 py-4">
+                        <span class="flex gap-6 pt-4">
                             @php
                                 $userRating = auth()->check()
                                     ? auth()
@@ -60,7 +71,12 @@
                         </span>
                     </form>
                 </div>
+
+                
             </div>
+
+
+
             <div class="prodct_cart bg-slate-100 col-span-1 w-[25%]">
 
                 <div class="w-full bg-green-500 py-3  rounded">

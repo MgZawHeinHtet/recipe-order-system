@@ -6,7 +6,21 @@ const price = document.querySelector("#product_price");
 const payments = document.querySelectorAll('.payment_check');
 const checkoutBtn = document.querySelector(".checkout-btn");
 const paymentForm = document.querySelector(".payment-form");
+const settingBtn = document.querySelector(".setting-toogle");
+const profileShow = document.querySelector(".profile-show");
+const profileEdit = document.querySelector(".profile-edit");
 
+
+
+
+
+if (settingBtn) {
+    settingBtn.addEventListener('click', function () {
+        profileShow.classList.toggle('hidden');
+        profileEdit.classList.toggle('hidden');
+    })
+
+}
 
 if (inputCount) {
     inputCount.addEventListener("change", function () {

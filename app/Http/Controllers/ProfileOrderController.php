@@ -16,7 +16,7 @@ class ProfileOrderController extends Controller
          };
         return view('profile.order-lists',[
             'order'=>$order,
-            'orders'=>Customer::where('user_id',auth()->user()->id)->first()?->orders()->with('payment','customer','order_status')->paginate(10)
+            'orders'=>Customer::where('user_id',auth()->user()->id)->first()?->orders()->with('payment','customer','order_status')->latest()->paginate(10)
         ]);
     }
 }

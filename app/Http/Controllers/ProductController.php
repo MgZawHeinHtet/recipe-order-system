@@ -36,6 +36,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        
         //add notification to subscriber
        subscriber::sendNotification('add-product');
 
@@ -49,12 +50,15 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
-    {
+    public function show(Product $product){
+    $ingredients = explode(',', $product->ingredients);
+
+    
         return view('product.product-detail',
     [
         'product'=>$product,
-        'randomProducts'=>Product::with('category')->inRandomOrder()->limit(5)->get()
+        'randomProducts'=>Product::with('category')->inRandomOrder()->limit(5)->get(),
+        'ingredients' => $ingredients
     ]);
     }
 
@@ -92,6 +96,10 @@ class ProductController extends Controller
         $product->description = $cleanData['description'];
         $product->price = $cleanData['price'];
         $product->category_id = $cleanData['category_id'];
+        $product->stock = $cleanData['stock'];
+        $product->is_publish = $cleanData['is_publish'];
+        $product->country = $cleanData['country'];
+        $product->ingredients = $cleanData['ingredients'];
         
         $product->update();
         return redirect('/dashboard/products')->with('edit','Updated Successfully 🎉');

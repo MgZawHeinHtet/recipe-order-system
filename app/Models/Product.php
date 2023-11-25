@@ -26,8 +26,15 @@ class Product extends Model
         'description',
         'photo',
         'price',
-        'category_id'
+        'category_id',
+        'country',
+        'ingredients',
+        'stock',
+        'is_publish'
     ];
+
+
+      
     private $ratingCount ;
     public function category(){
         return $this->belongsTo(Category::class);

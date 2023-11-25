@@ -13,7 +13,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = auth()->user()->notifications()->with(['user','recipent'])->get();
+        $notifications = auth()->user()->notifications()->with(['user','recipent'])->latest()->get();
         $unread_notifications = $notifications->filter(function($noti){
             return $noti->is_read == false;
         });

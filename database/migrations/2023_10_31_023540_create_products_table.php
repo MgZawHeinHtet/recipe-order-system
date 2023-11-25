@@ -18,7 +18,11 @@ return new class extends Migration
             $table->string('photo');
             $table->double('price');
             $table->integer('rating')->default(5);
+            $table->unsignedBigInteger('stock')->default(10);
+            $table->string('ingredients');
+            $table->string('country');
             $table->unsignedBigInteger('category_id');
+            $table->boolean('is_publish')->nullable()->default(true);
             $table->timestamps();
         });
     }

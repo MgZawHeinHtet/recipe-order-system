@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\subscriber;
@@ -59,7 +60,12 @@ class OrderController extends Controller
      */
     public function update( Order $order)
     {   
-        subscriber::sendNotiByOrderPerson('change-order-status',$order->customer->user_id);
+        Notification::create([
+            'user_id'=> $order->customer->user_id,
+            'noti_type' => 'change-order-status',
+            'is_read'=> false,
+            'recipent_id'=> 1
+        ]);
         $order->order_status_id= request('status');
         $order->update();
         return back();

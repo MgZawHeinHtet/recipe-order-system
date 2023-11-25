@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use PharIo\Manifest\Email;
 
 class AuthController extends Controller
 {
@@ -41,6 +42,8 @@ class AuthController extends Controller
         $cleanData['confirm-password'] = '';
 
         User::create($cleanData);
+
+        
         return redirect('/login');
     }
 

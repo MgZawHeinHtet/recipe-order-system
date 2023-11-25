@@ -36,7 +36,11 @@ class ProductRequest extends FormRequest
             'description'=>['required','max:200'],
             'photo' => [$this->isUpdate?'':'required','image'],
             'price'=>['required','numeric'],
-            'category_id' => ['required',Rule::exists('categories','id')]
+            'category_id' => ['required',Rule::exists('categories','id')],
+            'country'=>['required'],
+            'ingredients'=>['required'],
+             'is_publish'=>['boolean'],
+            'stock'=>['required']
         ];
     }
    

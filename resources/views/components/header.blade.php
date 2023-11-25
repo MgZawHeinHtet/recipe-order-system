@@ -11,9 +11,11 @@
                 <a href="/">Home</a>
             </li>
             <li class="text-lg font-medium hover:underline decoration-green-500 decoration-4 underline-offset-8">
-                <a>Menu</a>
+                <a>Shop</a>
             </li>
-
+            <li class="text-lg font-medium hover:underline decoration-green-500 decoration-4 underline-offset-8">
+                <a>Contact Us</a>
+            </li>
 
             @if (Auth::check())
                 @if (auth()->user()->is_admin)
@@ -22,18 +24,7 @@
                         <a href="/dashboard"> Dashboard</a>
                     </li>
                 @endif
-
-                <li class="text-lg font-medium hover:underline decoration-green-500 decoration-4 underline-offset-8">
-                    <form action="/logout" method="POST">
-                        @csrf
-                        <button type="submit"> Log <i class="fa fa-sign-out" aria-hidden="true"></i> </button>
-                    </form>
-                </li>
-            @else
-                <li class="text-lg font-medium hover:underline decoration-green-500 decoration-4 underline-offset-8">
-                    <a href="/login">Login</a>
-                </li>
-            @endif
+           @endif
 
         </ul>
 
@@ -89,6 +80,13 @@
                         </form>
                     </div>
                 </div>
+            @else
+            <ul>
+
+                <li class="text-lg font-medium  decoration-green-500 decoration-4 underline-offset-8">
+                    <a href="/login">Login</a>
+                </li>
+            </ul>
             @endauth
 
         </div>

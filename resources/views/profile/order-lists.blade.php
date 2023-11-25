@@ -1,4 +1,30 @@
-@props(['order' => null,'orders'=>null])
+@props(['order' => null, 'orders' => null])
+@section('javascript')
+    <script>
+        function myFunction() {
+            // Get the text field
+            var copyText = document.getElementById("myInput");
+
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+
+            // Alert the copied text
+            alert("Copied the text: " + copyText.value);
+
+        }
+
+        function copy(id) {
+            const copy = document.getElementById(`copy-${id}`).innerHTML;
+            navigator.clipboard.writeText(copy);
+        }
+    </script>
+@endsection
+
+@yield('javascript')
 
 <x-profile-layout>
     <section class="">
@@ -7,8 +33,8 @@
         <div class="flex justify-between">
             <form class="border-2 border-green-500 rounded-lg " action="/profile/orders" action="get">
                 @csrf
-                <input placeholder="Track Order" value="{{ request('tracker') }}" class="outline-none  px-4 py-2 rounded-lg mr-0" type="text"
-                    name="tracker">
+                <input placeholder="Track Order" value="{{ request('tracker') }}"
+                    class="outline-none  px-4 py-2 rounded-lg mr-0" type="text" name="tracker">
                 <button class="px-4 py-3 border-l-2 border-green-500 ml-0">Track</button>
             </form>
 
@@ -127,14 +153,28 @@
                         @foreach ($orders as $index => $order)
                             <tr class=" border-b-2">
                                 <td class="px-6 py-4 text-gray-700">{{ $index + 1 }}</td>
-                                <td class="px-6 py-4 text-gray-700">{{ $order->order_number }}</td>
+                                <td class="px-6 py-4 text-gray-700"><span
+                                        id="copy-{{ $index }}">{{ $order->order_number }}</span>
+                                    <button onclick="copy({{ $index }})" data-tooltip-target="tooltip-default"
+                                        type="button"
+                                        class="text-white  focus:outline-none font-medium rounded-lg text-lg text-center"><i
+                                            class="fa-solid fa-clipboard ml-1 text-green-500 text-lg"></i>
+                                    </button>
+
+                                    <div id="tooltip-default" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        Copy Text!!
+                                        <div class="tooltip-arrow " data-popper-arrow></div>
+                                    </div>
+
+                                </td>
                                 <td class="px-6 py-4 font-bold">{{ $order->order_date }}</td>
                                 <td class="px-6 py-4  ">{{ $order->payment->payment_type }}</td>
                                 <td class="px-6 py-4 font-bold text-orange-400">{{ $order->order_status->status }}</td>
                                 <td class="px-6 py-4"><a
                                         class="px-4 py-2 mr-3 bg-green-500 rounded-lg text-white font-semibold"
-                                        href="">View</a><button
-                                        class="px-4 py-2 bg-red-500 rounded-lg text-white font-semibold">Cancel</button>
+                                        href="/invoice/{{ $order->id }}">View</a><button
+                                        class="{{ $order->order_status_id > 2 ? 'hidden':'' }} px-4 py-2 bg-red-500 rounded-lg text-white font-semibold">Cancel</button>
                                 </td>
                             </tr>
                         @endforeach

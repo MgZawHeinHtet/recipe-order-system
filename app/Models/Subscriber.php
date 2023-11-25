@@ -36,4 +36,6 @@ class subscriber extends Model
             'recipent_id'=> 1
         ]);
     }
+
+    
 }

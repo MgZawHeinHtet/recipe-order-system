@@ -11,6 +11,7 @@
             <h4 class="text-3xl font-semibold">Cart</h4>
             <span class="py-2 text-slate-500">Home/Cart</span>
         </div>
+        <x-alert></x-alert>
         <div class="grid grid-cols-3  mt-16 mb-10 gap-10">
             <div class="cart_body col-span-2">
                 <table class="w-full text-left border-separate border-spacing-y-4">

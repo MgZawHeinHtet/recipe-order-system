@@ -8,8 +8,10 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PdfDownloadController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileOrderController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ProfileRatedController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\UserController;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Route;
@@ -106,4 +109,17 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/checkout/orderSuccess',[CheckoutController::class,'success']);
 
+    //invoice
+    Route::get('/invoice/{order:id}',[InvoiceController::class,'index']);
+
+    Route::get('/invoice/{order:id}/download',[PdfDownloadController::class,'download']);
+});
+
+
+Route::get('testing/{order:id}',function(Order $order){
+    
+    return view('customer_invoice',[
+        'order' => $order,
+        'products' => $order->order_items
+    ]);
 });

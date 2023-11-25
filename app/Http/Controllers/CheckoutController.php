@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderItems;
 use App\Models\Notification;
 use App\Models\Payment;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,7 @@ class CheckoutController extends Controller
             return back()->with('warning','Pls fill Your Info First');
         }
 
-        $order =Order::create([
+        $order = Order::create([
             'customer_id'=> $customer_id,
             'order_number' => '#N@ture-'. Str::random(6),
             'payment_id' => request()->payment,
@@ -54,13 +55,26 @@ class CheckoutController extends Controller
        
         $cartItems = Cart::where('user_id',$curr_user->id)->first()->cart_items->load('product');
         
+        
         foreach($cartItems as $cartItem){
+
+            if($cartItem->quantity > $cartItem->product->stock){
+                $order->delete();
+                return redirect('/home/cart')->with('stock',$cartItem->product->title.' is out of stock!!');
+                break;
+            }else{
+                $product = Product::find($cartItem->product->id);
+                $product->stock -= $cartItem->quantity;
+                $product->update();
+            }
+
             OrderItems::create([
                 'order_id' => $order->id,
                 'product_id'=>$cartItem->product->id,
                 'quantity'=>$cartItem->quantity,
                 'total'=>$cartItem->total
             ]);
+
             $cartItem->delete();
         }
 
