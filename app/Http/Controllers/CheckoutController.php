@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutFormRequest;
+use App\Mail\InvoiceMail;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Customer;
@@ -16,6 +17,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CheckoutController extends Controller
@@ -60,6 +62,7 @@ class CheckoutController extends Controller
 
             if($cartItem->quantity > $cartItem->product->stock){
                 $order->delete();
+
                 return redirect('/home/cart')->with('stock',$cartItem->product->title.' is out of stock!!');
                 break;
             }else{
@@ -77,6 +80,9 @@ class CheckoutController extends Controller
 
             $cartItem->delete();
         }
+      
+        Mail::to($curr_user->email)->send(new InvoiceMail($order,$products = $cartItems));
+        
 
         //send user noti to now success
         Notification::create([
@@ -85,11 +91,15 @@ class CheckoutController extends Controller
             'is_read'=> false,
             'recipent_id'=> 1
         ]);
+
         
-        return redirect('/checkout/orderSuccess')->with('success','Order Successfully');
+        return redirect()->route('checkout_success',['order'=>$order]);
     }
 
-    public function success(){
-        return view('order-success');
+    public function success($order){
+        $realOrder = Order::find($order);
+        return view('order-success',[
+            'order'=> $realOrder
+        ]);
     }
 }

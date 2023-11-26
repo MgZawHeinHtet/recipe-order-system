@@ -9,16 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewuserReviewMail extends Mailable implements ShouldQueue
+class InvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public $name)
+    public function __construct(public $order,public $products )
     {
-    //
+        //
     }
 
     /**
@@ -27,7 +27,7 @@ class NewuserReviewMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Newuser Review Mail',
+            subject: 'Invoice Mail',
         );
     }
 
@@ -37,7 +37,7 @@ class NewuserReviewMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'mail.review',
+            view: 'mail.invoice'
         );
     }
 

@@ -1,5 +1,12 @@
 import "./bootstrap";
 
+import 'tinymce/tinymce';
+import 'tinymce/skins/ui/oxide/skin.min.css';
+import 'tinymce/skins/content/default/content.min.css';
+import 'tinymce/skins/content/default/content.css';
+import 'tinymce/icons/default/icons';
+import 'tinymce/themes/silver/theme';
+import 'tinymce/models/dom/model';
 const inputCount = document.querySelector("#quantity_count");
 const total = document.querySelector("#show_total");
 const price = document.querySelector("#product_price");
@@ -9,8 +16,6 @@ const paymentForm = document.querySelector(".payment-form");
 const settingBtn = document.querySelector(".setting-toogle");
 const profileShow = document.querySelector(".profile-show");
 const profileEdit = document.querySelector(".profile-edit");
-
-
 
 
 
@@ -42,3 +47,14 @@ for (let payment of payments) {
         }
     });
 }
+
+// .. After imports init TinyMCE ..
+window.addEventListener('DOMContentLoaded', () => {
+    tinymce.init({
+        selector: '#review',
+
+        /* TinyMCE configuration options */
+        skin: false,
+        content_css: false
+    });
+});

@@ -48,7 +48,7 @@
                                             @csrf
                                            
                                             <input type="text" value="{{ $cart->quantity }}" name="quantity"
-                                                class="quantity_input w-12 h-8 mx-3 focus:border-0 focus:ring-green-500">
+                                                class="quantity_input ring ring-slate-500 text-center rounded w-12 h-8 mx-3 focus:border-0 focus:ring-green-500">
                                            
                                         </form>
                                     </td>

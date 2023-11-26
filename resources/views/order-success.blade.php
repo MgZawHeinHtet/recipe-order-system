@@ -11,9 +11,8 @@
                 <p class="text-sm/7 text-center  tracking-wide">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem aperiam aliquid omnis deleniti sint a necessitatibus, rem eius quia nisi </p>
             </div>
             <div class="flex z-10">
-                <form action="">
-                    <button class="rounded w-40 py-2 px-2 shadow mr-3">View Order</button>
-                </form>
+                    <a href="/invoice/{{ $order->id }}" class="rounded w-40 text-center py-2 px-2 shadow mr-3">View Order</a>
+            
                 <form action="">
                     <button class="rounded py-2 px-2 bg-green-500 uppercase text-white">continue shopping</button>
                 </form>

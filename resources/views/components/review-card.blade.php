@@ -2,7 +2,7 @@
     class="cursor-move ring-1 ring-green-500 grow-0 shrink-0 w-64 overflow-hidden testimonial-card  flex flex-col  h-80  pb-2 px-7 rounded-xl">
     <div class="testimonial-content h-[75%] relative pt-5 backdrop-blur-lg overflow-y-scroll">
         <p class=" text-slate-600 italic tracking-wider text-lg font-normal">
-            {{ $review->description }}
+            {!! $review->description !!}
         </p>
     </div>
     <div class="h-[25%]">

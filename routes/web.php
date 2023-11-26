@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileOrderController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ProfileRatedController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\UserController;
 use App\Models\Order;
@@ -107,19 +108,19 @@ Route::middleware('auth')->group(function(){
     //update customer
     Route::patch('/customer/{customer:id}',[CustomerController::class, 'update']);
 
-    Route::get('/checkout/orderSuccess',[CheckoutController::class,'success']);
+    Route::get('/checkout/orderSuccess/{order}',[CheckoutController::class,'success'])->name('checkout_success');
 
     //invoice
-    Route::get('/invoice/{order:id}',[InvoiceController::class,'index']);
+    Route::get('/invoice/{order:id}',[InvoiceController::class,'index'])->name('invoice');
 
     Route::get('/invoice/{order:id}/download',[PdfDownloadController::class,'download']);
+
+    Route::get('/review',[ReviewController::class, 'index']);
+
+    Route::post('/review',[ReviewController::class, 'store']);  
 });
 
 
-Route::get('testing/{order:id}',function(Order $order){
-    
-    return view('customer_invoice',[
-        'order' => $order,
-        'products' => $order->order_items
-    ]);
+Route::get('/testing',function(){
+   return view('review.review-form');
 });

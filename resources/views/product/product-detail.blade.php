@@ -18,7 +18,7 @@
                     <h4 class="text-lg text-red-500 italic line-through">Out Of Stock</h4>
 
                     @else
-                    <h4 class="text-lg text-slate-900 itali">In Stock - <span >{{ $product?->stock }}</span></h4>
+                    <h4 class="text-normal text-slate-900 itali">In Stock - <span >{{ $product?->stock }}</span></h4>
                     @endif
                 </div>
 

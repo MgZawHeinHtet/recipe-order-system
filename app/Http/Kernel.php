@@ -2,14 +2,18 @@
 
 namespace App\Http;
 
+
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\CartMiddleware;
 use App\Http\Middleware\RatingMiddleware;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends HttpKernel
 {
+   
     /**
      * The application's global HTTP middleware stack.
      *

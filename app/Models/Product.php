@@ -27,7 +27,7 @@ class Product extends Model
         'photo',
         'price',
         'category_id',
-        'country',
+        'country_id',
         'ingredients',
         'stock',
         'is_publish'
