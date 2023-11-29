@@ -1,14 +1,13 @@
 <x-admin-layout>
-  
     <div class="flex justify-between items-center text-normal font-normal capitalize ">
-        <h2 class="text-3xl text-slate-400 font-bold">Products Managment</h2>
+        <h2 class="text-3xl text-slate-400 font-bold">Countries Managment</h2>
         <div>
             <a class="block rounded  bg-green-500 w-44 py-3 text-center hover:bg-green-700 transition-all duration-150 text-white"
-                href="/dashboard/products/create  "> <i class="fa-solid fa-plus text-white"></i> Add Product</a>
+                href="/dashboard/countries/create "> <i class="fa-solid fa-plus text-white"></i> Add Country</a>
         </div>
     </div>
 
-   <x-alert></x-alert>
+    <x-alert></x-alert>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="flex items-center justify-between pb-4">
             <div>
@@ -95,7 +94,7 @@
                 </div>
                 <input type="text" id="table-search"
                     class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search for items">
+                    placeholder="Search for users">
             </div>
         </div>
 
@@ -107,62 +106,52 @@
                         Id
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Product name
+                        Name
                     </th>
                     <th scope="col" class=" px-6 py-3">
-                        Description
+                        Citizen
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Category
+                        Postal Code
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Price
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Is_publish
-                    </th>
+                  
                     <th scope="col" class="px-6 py-3">
                         Created_at
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
                     </th>
+
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $product)
+                @foreach ($countries as $country)
                     <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800">
                         <td class="px-6">
-                            <span class="font-bold">{{ $product->id }}</span>
+                            <span class="font-bold">{{ $country->id }}</span>
                         </td>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white flex items-center ">
-                            <img class="w-10 h-10 rounded-full" src="{{ $product->photo }}" alt="">
-                            <span class="ml-2">{{ $product->title }}</span>
-                        </th>
-                        <td class="px-4 py-4">
-                            <span class="line-clamp-2 w-72">
-                                {{ $product->description }}
+                       
+                        <td class="px-6 py-4">
+                            <span class="line-clamp-2">
+                                {{ $country->name }}
                             </span>
                         </td>
                         <td class="px-6 py-4 ">
-                            {{ $product->category?->name ??  'Deleted Category'}}
+                            {{ $country->citizen }}
                         </td>
                         <td class="px-6 py-4">
-                            ${{ $product->price }}
+                            {{ $country->postal_code }}
                         </td>
+                     
                         <td class="px-6 py-4">
-                            {{ $product->is_publish ? 'True' : 'False' }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $product->created_at->format('d-m-y') }}
+                            {{ $country->created_at->format('d-m-y') }}
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center">
-                                <a href="/dashboard/products/{{ $product->id }}/edit"
+                                <a href="/dashboard/countries/{{ $country->id }}/edit"
                                     class="font-medium mr-3 text-green-600 dark:text-green-500 hover:underline">Edit</a>
-                                <form action="/dashboard/products/{{ $product->id }}" method="POST">
+                                <form action="/dashboard/countries/{{ $country->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="font-medium text-red-500 hover:underline">Delete</button>
@@ -170,6 +159,7 @@
                             </div>
 
                         </td>
+
                     </tr>
                 @endforeach
 
@@ -177,13 +167,9 @@
             </tbody>
 
         </table>
-        <div>
+    </div>
+    <div>
+        {{ $countries->links() }}
 
-        </div>
     </div>
-   
-    <div class="paginator">
-        {{ $products->links() }}
-    </div>
-   
 </x-admin-layout>

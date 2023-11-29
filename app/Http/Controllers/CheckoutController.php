@@ -62,7 +62,6 @@ class CheckoutController extends Controller
 
             if($cartItem->quantity > $cartItem->product->stock){
                 $order->delete();
-
                 return redirect('/home/cart')->with('stock',$cartItem->product->title.' is out of stock!!');
                 break;
             }else{
@@ -77,9 +76,10 @@ class CheckoutController extends Controller
                 'quantity'=>$cartItem->quantity,
                 'total'=>$cartItem->total
             ]);
-
-            $cartItem->delete();
         }
+
+        //delete all data from cart
+        $curr_user->cart->cart_items()->delete();
       
         Mail::to($curr_user->email)->send(new InvoiceMail($order,$products = $cartItems));
         

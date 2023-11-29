@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('ingredients');
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('category_id');
-            $table->boolean('is_publish')->nullable()->default(true);
+            $table->string('is_publish')->nullable()->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

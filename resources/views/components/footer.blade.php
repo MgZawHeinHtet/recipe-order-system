@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="bg-green-700 w-full py-5 text-center space-y-2">
+    <div class="bg-green-700 w-screen py-5 text-center space-y-2">
         <p class="uppercase font-semibold text-slate-200 tracking-wider">health fast-causual food,craft with ❤️ in
             nature recipe</p>
         <p class="uppercase text-slate-50 text-sm  font-light tracking-wider">developed by zaw hein htet</p>

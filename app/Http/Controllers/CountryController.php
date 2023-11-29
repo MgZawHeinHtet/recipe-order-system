@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\countryFormRequest;
+use App\Http\Requests\CountryFormRequest as RequestsCountryFormRequest;
 use App\Models\Country;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,9 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        return view('Dashboard.country',[
+            'countries'=>Country::latest()->paginate(10)
+        ]);
     }
 
     /**
@@ -20,15 +24,17 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('Dashboard.country-create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(countryFormRequest $request)
     {
-        //
+        $cleanData = $request->validated();
+        Country::create($cleanData);
+        return redirect('/dashboard/countries')->with('create','Country created succesfully!! 🎆');
     }
 
     /**
@@ -44,15 +50,19 @@ class CountryController extends Controller
      */
     public function edit(Country $country)
     {
-        //
+        return view('Dashboard.country-edit',[
+            'country'=>$country
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Country $country)
+    public function update(RequestsCountryFormRequest $request, Country $country)
     {
-        //
+        $cleanData = $request->validated();
+        $country->update($cleanData);
+        return back()->with('update','Country updated successfully!! 🎉');
     }
 
     /**
@@ -60,6 +70,8 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
-        //
+        
+        $country->delete();
+        return back()->with('delete','Delete Succesfully! 💥');
     }
 }

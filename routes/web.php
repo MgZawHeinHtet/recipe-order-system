@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -62,6 +63,7 @@ Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
     Route::resource('orders',OrderController::class);
     Route::resource('subscribers',SubscriberController::class);
     Route::get('users',[UserController::class,'dashboard_index']);
+    Route::resource('countries',CountryController::class);
 });
 
 Route::middleware('auth')->group(function(){

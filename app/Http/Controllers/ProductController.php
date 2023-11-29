@@ -36,30 +36,33 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        
+
         //add notification to subscriber
-       subscriber::sendNotification('add-product');
+        subscriber::sendNotification('add-product');
 
         $cleanData = $request->validated();
 
         $cleanData['photo'] = '/storage/' . $request->photo->store('/products');
         Product::create($cleanData);
-        return redirect('/dashboard/products')->with('create','Created Successfully 🎉');
+        return redirect('/dashboard/products')->with('create', 'Created Successfully 🎉');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product){
-    $ingredients = explode(',', $product->ingredients);
+    public function show(Product $product)
+    {
+        $ingredients = explode(',', $product->ingredients);
 
-    
-        return view('product.product-detail',
-    [
-        'product'=>$product,
-        'randomProducts'=>Product::with('category')->inRandomOrder()->limit(5)->get(),
-        'ingredients' => $ingredients
-    ]);
+
+        return view(
+            'product.product-detail',
+            [
+                'product' => $product,
+                'randomProducts' => Product::with('category')->inRandomOrder()->limit(5)->get(),
+                'ingredients' => $ingredients
+            ]
+        );
     }
 
     /**
@@ -68,7 +71,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
 
-        return view(    
+        return view(
             'Dashboard.product-edit',
             [
                 'product' => $product,
@@ -82,12 +85,14 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+
+
         subscriber::sendNotification('update-product');
 
         $cleanData = $request->validated();
-        if($request->photo){
-           
-                if(File::exists($path = public_path($product->photo))){
+        if ($request->photo) {
+
+            if (File::exists($path = public_path($product->photo))) {
                 File::delete($path);
             }
             $product->photo = '/storage/' . $request->photo->store('/products');
@@ -97,12 +102,12 @@ class ProductController extends Controller
         $product->price = $cleanData['price'];
         $product->category_id = $cleanData['category_id'];
         $product->stock = $cleanData['stock'];
-        $product->is_publish = $cleanData['is_publish'];
-        $product->country = $cleanData['country'];
+        $product->is_publish = request()->is_publish ? true : false;
+        $product->country_id = $cleanData['country_id'];
         $product->ingredients = $cleanData['ingredients'];
-        
+
         $product->update();
-        return redirect('/dashboard/products')->with('edit','Updated Successfully 🎉');
+        return redirect('/dashboard/products')->with('edit', 'Updated Successfully 🎉');
     }
 
     /**

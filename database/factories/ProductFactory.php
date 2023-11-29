@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Process\FakeProcessSequence;
 
@@ -25,7 +26,7 @@ class ProductFactory extends Factory
             'price'=>fake()->randomNumber(4),
             'category_id' => Category::factory(),
             'ingredients' => 'banana,mango,tomato',
-            'country' => fake()->country(),
+            'country_id' => Country::factory()->create(),
             
         ];
     }

@@ -158,9 +158,9 @@
             </tbody>
 
         </table>
+    </div>
+    <div>
         {{ $users->links() }}
-        <div>
 
-        </div>
     </div>
 </x-admin-layout>

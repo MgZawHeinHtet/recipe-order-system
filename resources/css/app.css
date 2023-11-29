@@ -34,6 +34,8 @@
     display: block;
 }
 
+/* uer review section  */
+
 .testimonial-content::before {
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     content: "\201C";
@@ -52,8 +54,11 @@
     display: none;
 }
 
-
 input{
+    outline : none;
+}
+
+textarea{
     outline : none;
 }
 

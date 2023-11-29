@@ -15,8 +15,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $requests = request(['status']);
         return view('Dashboard.order',[
-            'orders' => Order::with('customer','payment')->latest()->paginate(10)
+            'orders' => Order::with('customer','payment')->filter($requests)->latest()->paginate(10),
+            'statuses' => OrderStatus::all()
         ]);
     }
 
@@ -41,6 +43,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        
         return view('Dashboard.order-detail',[
             'order'=> $order,
             'orderStatuses' => OrderStatus::all()

@@ -17,7 +17,9 @@ class CountryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name'=>fake()->name(),
+            'citizen'=> fake()->name(),
+            'postal_code' => fake()->randomNumber()
         ];
     }
 }

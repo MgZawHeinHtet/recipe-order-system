@@ -26,4 +26,10 @@ class Order extends Model
     public function order_status(){
         return $this->belongsTo(OrderStatus::class);
     }
+
+    public function scopeFilter($query,$request){
+        if($status_id = $request['status']){
+            $query->where('order_status_id',$status_id);
+        }
+    }
 }

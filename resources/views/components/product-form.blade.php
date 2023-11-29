@@ -37,22 +37,17 @@
             <x-error name="price"></x-error>
         </div>
 
-        <div class="w-full">
-            <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
-            <input type="text" name="country" id="country" value="{{ old('country', $product?->country) }}"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                placeholder="$0-0-0">
-            <x-error name="country"></x-error>
-        </div>
+       <x-country :product="$product"></x-country>
+
         <x-category :product="$product"></x-category>
 
 
         <div class="sm:col-span-2">
             <label for="ingredients"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingredients</label>
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingredients</label>
             <input type="text" name="ingredients" id="name" value="{{ old('ingredients', $product?->ingredients) }}"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                placeholder="Eg : banana,mango,papaya">
+                placeholder="Eg : banana 4kg,mango 1ml,papaya 4g">
             <x-error name="ingredients"></x-error>
         </div>
 
@@ -69,7 +64,7 @@
             <label for="is_publish" class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Is Publish</label>
 
             <label class="relative inline-flex items-center me-5 cursor-pointer">
-                <input name="is_publish" type="checkbox" value=1 class="sr-only peer" {{ old('is_publish',$product?->is_publish) ? 'checked="checked"' : '' }}>
+                <input name="is_publish" type="checkbox"  class="sr-only peer" {{ old('is_publish',$product?->is_publish) ? 'checked="checked"' : '' }}>
                 <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
                
               </label>
