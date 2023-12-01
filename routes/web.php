@@ -10,6 +10,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PdfDownloadController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\ProfileOrderController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ProfileRatedController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\UserController;
 use App\Models\Order;
@@ -29,9 +31,9 @@ use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
+|------------------kk--------------------------------------------------------
+|k
+k| Here kkkkisk where you can register web routes fork your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
@@ -40,8 +42,11 @@ use Illuminate\Support\Facades\Route;
 //starter route
 Route::get('/', [HomeController::class, 'index']);
 
-//service page
+//contact us page
+Route::get('/contact',[HomeController::class,'contactIndex']);
 
+//main page
+Route::get('/shop',[ShopController::class,'index']);
 
 //Auth route
 Route::get('/login',[AuthController::class, 'show']);
@@ -94,6 +99,11 @@ Route::middleware('addToCart')->group(function(){
     Route::post('/products/{product:id}/addToCart',[CartController::class, 'addToCart']);
     Route::get('/home/cart',[CartController::class,'index']);
     Route::delete('/carts/{cart:id}',[CartController::class, 'destory']);
+});
+
+// mail sender routes 
+Route::prefix('mail')->group(function(){
+    Route::post('contact',[MailController::class,'contact']);
 });
 
 //checkout

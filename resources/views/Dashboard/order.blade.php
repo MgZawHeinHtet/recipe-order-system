@@ -4,7 +4,7 @@
     <h2 class="text-3xl text-slate-500 font-bold">Order Management</h2>
     <div>
 
-        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+        <button id="dropdownDefaultButton" data-dropdown-togglek\="dropdown"
             class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "
             type="button">Filter By Status <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -17,6 +17,10 @@
         <div id="dropdown"
             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
             <ul class="py-2 text-sm text-gray-700 " aria-labelledby="dropdownDefaultButton">
+                <li>
+                    <a href="?"
+                        class="block px-4 py-2 hover:bg-green-500">All</a>
+                </li>
                 @foreach ($statuses as $status)
                 <li>
                     <a href="?status={{ $status->id }}"

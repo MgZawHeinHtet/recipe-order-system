@@ -12,7 +12,6 @@
                 <p>Order-Id : #{{ $order->id }}</p>
                 <p>Track-number : {{ $order->order_number }}</p>
                 <p>Payment Method : {{ $order->payment->payment_type }}</p>
-                
             </div>
             <div>
                 <p>Name : {{ $order->customer->first_name .' ',$order->customer->last_name }}</p>

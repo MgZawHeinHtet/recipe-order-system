@@ -28,7 +28,7 @@ class Order extends Model
     }
 
     public function scopeFilter($query,$request){
-        if($status_id = $request['status']){
+        if($status_id = $request['status']??null){
             $query->where('order_status_id',$status_id);
         }
     }

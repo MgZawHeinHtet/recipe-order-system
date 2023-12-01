@@ -24,7 +24,7 @@
 
       <!-- content image  -->
       <div>
-        <img class="w-full h-auto" src="../../assets/home_page/hero-noodle.png"/>
+        <img class="w-full" src="../../assets/home_page/hero-noodle.png"/>
       </div>
     </div>
   </section>

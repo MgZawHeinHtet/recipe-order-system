@@ -2,7 +2,7 @@
     <nav class="mx-auto container flex justify-between items-center">
         <!-- logo  -->
         <div class="logo flex items-center">
-            <img class="w-24 h-24" loading="eager" src="../assets/nav_logo.png" alt="Logo" />
+            <img class="w-24 h-24" loading="eager" src="{{ asset('assets/nav_logo.png') }}" alt="Logo" />
         </div>
 
         <!-- nav link  -->
@@ -11,10 +11,10 @@
                 <a href="/">Home</a>
             </li>
             <li class="text-lg font-medium hover:underline decoration-green-500 decoration-4 underline-offset-8">
-                <a>Shop</a>
+                <a href="/shop">Shop</a>
             </li>
             <li class="text-lg font-medium hover:underline decoration-green-500 decoration-4 underline-offset-8">
-                <a>Contact Us</a>
+                <a href="/contact">Contact Us</a>
             </li>
 
             @if (Auth::check())

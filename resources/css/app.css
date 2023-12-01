@@ -62,6 +62,11 @@ textarea{
     outline : none;
 }
 
+/* //shop section */
+
+.category-box::-webkit-scrollbar{
+    display : none;
+}
 
 
 

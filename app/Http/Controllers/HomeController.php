@@ -17,7 +17,7 @@ class HomeController extends Controller
         ]);
     }
       //get data for service section hard data
-      public function getService()
+      public function getService()  
       {
           $services = [
               [
@@ -52,5 +52,9 @@ class HomeController extends Controller
               ]
           ];
           return $services;
+      }
+
+      public function contactIndex(){
+        return view('contact');
       }
 }
