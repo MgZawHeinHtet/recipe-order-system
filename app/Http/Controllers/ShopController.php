@@ -11,7 +11,8 @@ class ShopController extends Controller
     public function index(){
         return view('shop.index',[
             'categories'=>Category::all(),
-            'latestProducts'=> Product::latest()->take(4)->get()
+            'latestProducts'=> Product::latest()->take(4)->get(),
+            'priceProducts'=>Product::orderBy('price','desc')->take(4)->get()
         ]);
     }
 }
