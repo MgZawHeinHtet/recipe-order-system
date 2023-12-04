@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <div class="mt-8">
-                    <p class="text-center  text-normal text-slate-500">Get a discount, after 3 order. <a class="text-green-500 underline underline-offset-4" href="/">Continue Shopping</a></p>
+                    <p class="text-center  text-normal text-slate-500">Get a discount, after 3 order. <a class="text-green-500 underline underline-offset-4" href="/shop">Continue Shopping</a></p>
                 </div>
             </div>
         </div>

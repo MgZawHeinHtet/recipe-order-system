@@ -21,7 +21,7 @@
                             <fieldset
                                 class="border focus-within:border-green-500 trans  border-solid border-gray-400 p-1 rounded ">
                                 <input value="{{ old('first_name', $customer?->first_name) }}"
-                                    class="w-full peer border-0 px-5 py-1 focus:ring-0 " type="text"
+                                    class="w-full peer border-0 bg-gray-100 px-5 py-1 focus:ring-0 " type="text"
                                     name="first_name" id="">
 
                                 <legend
@@ -34,7 +34,7 @@
                             <fieldset
                                 class="border focus-within:border-green-500 trans border-solid border-gray-400 p-1 rounded">
                                 <input value="{{ old('last_name', $customer?->last_name) }}"
-                                    class="w-full peer border-0 px-5 py-1 focus:ring-0" type="text" name="last_name"
+                                    class="w-full peer border-0 bg-gray-100 px-5 py-1 focus:ring-0" type="text" name="last_name"
                                     id="">
 
                                 <legend class="text-normal peer-focus:animate-bounce px-2 trans text-slate-700 ">Last
@@ -46,7 +46,7 @@
                             <fieldset
                                 class="border focus-within:border-green-500 trans border-solid border-gray-400 p-1 rounded">
                                 <input value="{{ old('email', $customer?->email) }}"
-                                    class="w-full peer border-0 px-5 py-1 focus:ring-0" type="email" name="email"
+                                    class="w-full peer border-0 bg-gray-100 px-5 py-1 focus:ring-0" type="email" name="email"
                                     id="">
                                 <legend class="text-normal peer-focus:animate-bounce px-2 trans text-slate-700 ">Email
                                 </legend>
@@ -57,7 +57,7 @@
                         <div>
                             <fieldset
                                 class="border focus-within:border-green-500 trans border-solid border-gray-400 p-1 rounded">
-                                <textarea class="w-full border-0 px-5 py-1 focus:ring-0 peer" type="text" name="address1" id="">{{ old('address1', $customer?->address1) }}</textarea>
+                                <textarea class="w-full border-0 bg-gray-100 px-5 py-1 focus:ring-0 peer" type="text" name="address1" id="">{{ old('address1', $customer?->address1) }}</textarea>
                                 <legend class="text-normal peer-focus:animate-bounce px-2 trans text-slate-700 ">Address
                                     1</legend>
                             </fieldset>
@@ -67,7 +67,7 @@
                         <div>
                             <fieldset
                                 class="border focus-within:border-green-500 trans border-solid border-gray-400 p-1 rounded">
-                                <textarea " class="w-full border-0 px-5 py-1 focus:ring-0 peer" type="text" name="address2" id="">{{ old('address2', $customer?->address2) }}</textarea>
+                                <textarea " class="w-full border-0 bg-gray-100 px-5 py-1 focus:ring-0 peer" type="text" name="address2" id="">{{ old('address2', $customer?->address2) }}</textarea>
                                 <legend class="text-normal peer-focus:animate-bounce px-2 trans text-slate-700 ">
                                     Address 2</legend>
                             </fieldset>
@@ -78,7 +78,7 @@
                             <fieldset
                                 class="border focus-within:border-green-500 trans border-solid border-gray-400 p-1 rounded">
                                 <input value="{{ old('phone', $customer?->phone) }}"
-                                    class="w-full border-0 px-5 py-1 focus:ring-0 peer" type="number" name="phone"
+                                    class="w-full border-0 bg-gray-100 px-5 py-1 focus:ring-0 peer" type="number" name="phone"
                                     id="">
                                 <legend class="text-normal peer-focus:animate-bounce px-2 trans text-slate-700 ">Phone
                                 </legend>
@@ -90,7 +90,7 @@
                             <fieldset
                                 class="border focus-within:border-green-500 trans border-solid border-gray-400 p-1 rounded">
                                 <input value="{{ old('postal_code', $customer?->postal_code) }}"
-                                    class="w-full border-0 px-5 py-1 focus:ring-0 peer" type="number"
+                                    class="w-full border-0 bg-gray-100 px-5 py-1 focus:ring-0 peer" type="number"
                                     name="postal_code" id="">
                                 <legend class="text-normal peer-focus:animate-bounce px-2 trans text-slate-700 ">
                                     postal_code

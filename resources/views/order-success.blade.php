@@ -13,7 +13,7 @@
             <div class="flex z-10">
                     <a href="/invoice/{{ $order->id }}" class="rounded w-40 text-center py-2 px-2 shadow mr-3">View Order</a>
             
-                <form action="">
+                <form action="/shop" method="GET">
                     <button class="rounded py-2 px-2 bg-green-500 uppercase text-white">continue shopping</button>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-<section class="popular my-9 container">
+<section class="popular mt-0 mb-9 container">
     <div>
         <h2 class="antialiased font-sans text-5xl font-bold capitalize text-slate-700 tracking-wide">Today Special Menu
         </h2>

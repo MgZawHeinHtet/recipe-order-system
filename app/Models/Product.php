@@ -83,4 +83,21 @@ class Product extends Model
     public function country(){
         return $this->belongsTo(Country::class)->withTrashed();
     }
+
+    public function scopeFilter($query,$requests){
+        
+        if($type = $requests['type']?? null){
+            $query->where('title','LIKE','%'.$type.'%');
+        }
+
+        if($country = $requests['country']?? null){
+            $query->where('country_id',$country);
+        }
+
+        
+        if($category = $requests['category']?? null){
+            $query->where('category_id',$category);
+        }
+    }
+
 }

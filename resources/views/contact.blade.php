@@ -13,17 +13,17 @@
                         <div class="flex-1 space-y-4">
                             <div>
                                 <label class="text-lg block tracking-wide" for="">Full Name</label>
-                                <input name="name" value="{{ old('name',auth()->user()?->name) }}" class="w-full border-b-2 text-gray-500 border-gray-800" type="text">
+                                <input name="name" value="{{ old('name',auth()->user()?->name) }}" class="w-full border-b-2 bg-gray-100 text-gray-500 border-gray-800" type="text">
                                 <x-error name="name"></x-error>
                             </div>
                             <div>
                                 <label class="text-lg block tracking-wide" for="">E-mail</label>
-                                <input name="email" value="{{ old('email',auth()->user()?->email) }}" type="email" class="w-full border-b-2 text-gray-500 border-gray-800">
+                                <input name="email" value="{{ old('email',auth()->user()?->email) }}" type="email" class="w-full border-b-2 bg-gray-100 text-gray-500 border-gray-800">
                                 <x-error name="email"></x-error>
                             </div>
                             <div>
                                 <label class="text-lg block tracking-wide" for="">Message</label>
-                                <input name="message" value="{{ old('message') }}" type="text" class="w-full border-b-2 text-gray-500 border-gray-800">
+                                <input name="message" value="{{ old('message') }}" type="text" class="w-full border-b-2 bg-gray-100 text-gray-500 border-gray-800">
                                 <x-error name="message"></x-error>
                             </div>
                             <div>
