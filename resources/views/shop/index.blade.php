@@ -204,7 +204,7 @@
                         `
                     </div>
                     <div class="grid grid-cols-3 gap-6">
-                        @foreach ($priceProducts as $product)
+                        @foreach ($specialProducts as $product)
                             <x-special-card :product="$product"></x-special-card>
                         @endforeach
                     </div>

@@ -19,6 +19,7 @@ class Product extends Model
             if(File::exists($file = public_path($item->photo)) ){
                 File::delete($file);
             }
+            CartItem::where('product_id',$item->id)->delete();
         });
     }
 

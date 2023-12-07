@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Notification;
-use App\Models\Review;
+use App\Models\Coupons;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class CouponsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('review.review-form');
+        //
     }
 
     /**
@@ -29,24 +28,13 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'review'=>"required"
-        ]);
-
-        Review::create([
-            'description' => $request->review,
-            'user_id'=>auth()->user()->id
-        ]);
-
-        Notification::sendNotiAdmin(auth()->user()->id,'write-review');
-
-        return redirect('/');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Review $review)
+    public function show(Coupons $coupons)
     {
         //
     }
@@ -54,7 +42,7 @@ class ReviewController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Review $review)
+    public function edit(Coupons $coupons)
     {
         //
     }
@@ -62,7 +50,7 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, Coupons $coupons)
     {
         //
     }
@@ -70,9 +58,8 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Review $review)
+    public function destroy(Coupons $coupons)
     {
-        $review->delete();
-        return back();
+        //
     }
 }

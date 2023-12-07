@@ -27,10 +27,10 @@
                                     x{{ $item->quantity }}
                                 </td>
                                 <td class="px-6 py-4 text-slate-300">
-                                    ${{ $item->product->price }}
+                                    ${{ $item->order_price }}
                                 </td>
                                 <td class="px-6 py-4 text-slate-300">
-                                    ${{ $item->total }}
+                                    ${{ $total = $item->total }}
                                 </td>
                             </tr>
                         @endforeach
@@ -113,7 +113,7 @@
 
                 <div class="w-full p-5 bg-gray-900 rounded-lg ring-1 ring-gray-800 flex justify-between items-center space-y-3">
                     <h4 class="text-normal font-bold tracking-wider text-slate-300">Total</h4>
-                    <span class="text-green-500">${{ $order->order_items->sum('total') }}</span>
+                    <span class="text-green-500">${{ $total }}</span>
                 </div>
 
                 <div class="w-full p-5 bg-gray-900 rounded-lg ring-1 ring-gray-800 space-y-3">

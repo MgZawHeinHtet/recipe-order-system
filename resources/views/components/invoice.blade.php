@@ -12,6 +12,7 @@
                 <p>Order-Id : #{{ $order->id }}</p>
                 <p>Track-number : {{ $order->order_number }}</p>
                 <p>Payment Method : {{ $order->payment->payment_type }}</p>
+                <p>Discount : {{ $order->discount }}%</p>
             </div>
             <div>
                 <p>Name : {{ $order->customer->first_name .' ',$order->customer->last_name }}</p>
@@ -32,7 +33,7 @@
                     @foreach ($products as $product )
                     <tr class="border-b-2 border-gray-400">
                         <td class="py-2">{{ $product->product->title }}</td>
-                        <td class="py-2 px-2 border-x-2 border-gray-400 text-center">${{ $product->product->price }}</td>
+                        <td class="py-2 px-2 border-x-2 border-gray-400 text-center">${{ $product->order_price }}</td>
                         <td class="py-2 px-2  border-x-2 border-gray-400 text-center">{{ $product->quantity }}</td>
                         <td class="py-2 text-right">${{ $product->total }}</td>
                     </tr>

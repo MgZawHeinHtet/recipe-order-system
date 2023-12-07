@@ -18,7 +18,8 @@ class ShopController extends Controller
             'priceProducts'=>Product::orderBy('price','desc')->take(4)->get(),
             'cart' => Cart::where('user_id',auth()->user()?->id)->first(),
             'countries'=>Country::all(),
-            'products' => Product::latest()->filter($requests)->paginate(8)->withQueryString()
+            'products' => Product::latest()->filter($requests)->paginate(8)->withQueryString(),
+             'specialProducts'=>Product::latest()->take(3)->get()
         ]);
     }
 }

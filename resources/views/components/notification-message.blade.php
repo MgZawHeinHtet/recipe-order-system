@@ -24,3 +24,22 @@
     <span>Your Order  was successed by</span>
     <span>{{ $recipent }}</span>
 @endif
+
+@if($type === 'order-create')
+<span>New order was recived by</span>
+<span>{{ $recipent }}</span>
+@endif
+
+@if($type === 'out-stock')
+<span>check product!some product is out of stock</span>
+@endif
+
+@if($type === 'write-review')
+<span>New review was written by</span>
+<span>{{ $recipent }}</span>
+@endif
+
+@if($type === 'subscribe')
+
+<span>{{ $recipent }} was subscribed</span>
+@endif

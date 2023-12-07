@@ -9,6 +9,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InboxController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\NotificationController;
@@ -69,6 +70,7 @@ Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
     Route::resource('subscribers',SubscriberController::class);
     Route::get('users',[UserController::class,'dashboard_index']);
     Route::resource('countries',CountryController::class);
+    Route::resource('inboxes',InboxController::class);
 });
 
 Route::middleware('auth')->group(function(){
@@ -130,6 +132,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/review',[ReviewController::class, 'index']);
 
     Route::post('/review',[ReviewController::class, 'store']);  
+
+    Route::delete('/review/{review:id}',[ReviewController::class, 'destroy']);
 });
 
 

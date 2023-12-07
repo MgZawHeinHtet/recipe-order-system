@@ -9,7 +9,7 @@
 
             <div class="product_content w-[45%] space-y-3">
                 <h2 class="text-3xl font-bold mb-4">
-                    {{ $product->title }} <span class="text-sm underline text-green-500">(Spanish)</span>
+                    {{ $product->title }} <span class="text-sm underline text-green-500">({{ $product->country->citizen }})</span>
                    
                 </h2>
 

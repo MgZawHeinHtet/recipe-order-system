@@ -3,17 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
-use App\Models\Review;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class InboxController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('review.review-form');
+        $notifications = Notification::with(['user', 'recipent'])->where('user_id',1)->latest()->get();
+        $unread_notifications = $notifications->filter(function ($noti) {
+            return $noti->is_read == false;
+        });
+        $read_notifications = $notifications->filter(function ($noti) {
+            return $noti->is_read == true;
+        });
+
+        return view('Dashboard.inbox', [
+            'unread_notifications' => $unread_notifications,
+            'read_notifications' => $read_notifications,
+        ]);
     }
 
     /**
@@ -29,24 +39,13 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'review'=>"required"
-        ]);
-
-        Review::create([
-            'description' => $request->review,
-            'user_id'=>auth()->user()->id
-        ]);
-
-        Notification::sendNotiAdmin(auth()->user()->id,'write-review');
-
-        return redirect('/');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Review $review)
+    public function show(string $id)
     {
         //
     }
@@ -54,7 +53,7 @@ class ReviewController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Review $review)
+    public function edit(string $id)
     {
         //
     }
@@ -62,7 +61,7 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -70,9 +69,8 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Review $review)
+    public function destroy(string $id)
     {
-        $review->delete();
-        return back();
+        //
     }
 }

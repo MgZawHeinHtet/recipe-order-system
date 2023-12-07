@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 
 class ProfileOrderController extends Controller 
 {
+   
     public function index(){
+        $date = request()->order_date;
         $order=null;
         if($track = request()->tracker){
             $order = Order::with('order_status')->where('order_number',$track)->get(['order_status_id'])->first();
@@ -16,7 +18,7 @@ class ProfileOrderController extends Controller
          };
         return view('profile.order-lists',[
             'order'=>$order,
-            'orders'=>Customer::where('user_id',auth()->user()->id)->first()?->orders()->with('payment','customer','order_status')->latest()->paginate(10)
+            'orders'=>Customer::where('user_id',auth()->user()->id)->first()?->orders()->with('payment','customer','order_status')->userFilter($date)->latest()->paginate(10)
         ]);
     }
 }

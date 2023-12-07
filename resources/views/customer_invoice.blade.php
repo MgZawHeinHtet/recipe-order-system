@@ -103,7 +103,7 @@
                                 <td class="py-2">{{ $product->product->title }}</td>
                                 <td style="padding: 1rem;text-align: center;border-left:1px solid black "
                                     class="py-2 px-2 border-x-2 border-gray-400 text-center">
-                                    ${{ $product->product->price }}</td>
+                                    ${{ $product->order_price }}</td>
                                 <td style="padding: 1rem;text-align: center;border-left: 1px solid black"
                                     class="py-2 px-2  border-x-2 border-gray-400 text-center">{{ $product->quantity }}
                                 </td>

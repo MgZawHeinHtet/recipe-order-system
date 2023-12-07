@@ -4,16 +4,16 @@
         <div class="space-y-6">
             <div class="footer-social flex items-center justify-center gap-8">
                 <div class="icon bg-green-500 w-12 h-12 rounded-full flex justify-center items-center"><a
-                        href=""><img class="w-6 h-6" src="../assets/footer_icons/facebook.png"
+                        href=""><img class="w-6 h-6" src="{{ asset('assets/footer_icons/facebook.png') }}"
                             alt=""></a></div>
                 <div class="icon bg-green-500 w-12 h-12 rounded-full flex justify-center items-center"><a
-                        href=""><img class="w-6 h-6" src="../assets/footer_icons/instragram.png"
+                        href=""><img class="w-6 h-6" src="{{ asset('assets/footer_icons/instragram.png') }}"
                             alt=""></a></div>
                 <div class="icon bg-green-500 w-12 h-12 rounded-full flex justify-center items-center"><a
-                        href=""><img class="w-6 h-6" src="../assets/footer_icons/snapchat.png"
+                        href=""><img class="w-6 h-6" src="{{ asset('assets/footer_icons/snapchat.png') }}"
                             alt=""></a></div>
                 <div class="icon bg-green-500 w-12 h-12 rounded-full flex justify-center items-center"><a
-                        href=""><img class="w-6 h-6" src="../assets/footer_icons/pinterest.png"
+                        href=""><img class="w-6 h-6" src="{{ asset('assets/footer_icons/pinterest.png') }}"
                             alt=""></a></div>
             </div>
             <div class="footer-link flex items-center justify-center gap-8">

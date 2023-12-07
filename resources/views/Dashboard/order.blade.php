@@ -4,7 +4,7 @@
     <h2 class="text-3xl text-slate-500 font-bold">Order Management</h2>
     <div>
 
-        <button id="dropdownDefaultButton" data-dropdown-togglek\="dropdown"
+        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
             class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "
             type="button">Filter By Status <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -55,12 +55,17 @@
                         Status
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Discount
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Action
                     </th>
                 </tr>
             </thead>
             <tbody>
 
+                @if ($orders->count())
+                    
                 @foreach ($orders as $order)
                     <tr
                         class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
@@ -84,12 +89,21 @@
                         <td class="px-6 py-4">
                             {{ $order->order_status->status }}
                         </td>
+                        <td class="px-6 py-4 text-center">
+                            {{ $order->discount }} %
+                        </td>
                         <td class="px-6 py-4">
                             <a href="/dashboard/orders/{{ $order->id }}"
                                 class="font-medium text-green-600 dark:text-green-500 hover:underline">View</a>
                         </td>
                     </tr>
                 @endforeach
+                @else
+                <tr>
+                    <td colspan="8" class="text-center h-96"><p class="capitalize tracking-wide ">no order haven't found in this stage</p></td>
+                </tr>
+                 
+                 @endif
             </tbody>
         </table>
         {{ $orders->links() }}

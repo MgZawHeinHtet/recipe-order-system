@@ -130,8 +130,9 @@
 
         <div class="flex justify-between items-center mt-16">
             <h4 class="font-semibold tracking-wide text-lg">Order list and status</h4>
-            <form class="mr-12" action="" submit="onchange()">
-                <input class="border-green-500 border-2 rounded-lg px-2 py-1 " type="date" name="date">
+            <form class="mr-12" action="/profile/orders" method="get" onchange="submit()">
+                
+                <input value="{{ request()->order_date ?? '' }}" name="order_date" class="border-green-500 border-2 rounded-lg px-2 py-1 " type="date" >
             </form>
         </div>
         {{-- ordere table  --}}
@@ -180,7 +181,9 @@
                         @endforeach
                     </tbody>
                 </table>
+              <div class="mt-5">
                 {{ $orders->links() }}
+              </div>
             </div>
         @endif
 

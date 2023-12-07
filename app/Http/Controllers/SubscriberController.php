@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\subscriber;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,8 @@ class SubscriberController extends Controller
         $cleanData['user_id'] = auth()->user()->id;
         
         subscriber::create($cleanData);
+
+        Notification::sendNotiAdmin($cleanData['user_id'],'subscribe');
         return back();
     }
 

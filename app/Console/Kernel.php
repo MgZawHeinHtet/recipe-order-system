@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('product:auto-fill-stock-command')->everySecond();
+        $schedule->command('product:auto-fill-stock-command')->everyMinute();
     }
 
     /**

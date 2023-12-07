@@ -71,6 +71,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class);
     }
 
+    /** */
+
     public function userRatingOnProduct($id)
     {
         return $this->ratedProducts()->withPivot('rate')->where('product_id', $id)->first()?->pivot->rate;

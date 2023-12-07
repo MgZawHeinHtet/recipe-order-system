@@ -1,4 +1,5 @@
 @props(['cart_items' => null, 'customer' => null])
+
 <x-layout>
     <section class="container space-y-8 mb-8">
         <h2 class="text-2xl text-slate-080 font-semibold text-center">Check Out</h2>
@@ -104,12 +105,32 @@
                     <button class="px-6 py-2 bg-green-500 rounded-xl text-white font-bold mt-8">Save & Continue</button>
                 </form>
                 <hr class="w-full h-2 border-slate-400 my-6">
-                <div>
+
+            
+                    <form action="/checkout" method="GET">
+                        <h4 class="text-lg text-slate-900 font-semibold mb-3">Enter your coupon <span class="text-green-500">(optional)</span></h4>
+                        <span>
+                            <input name="coupon" value="{{ request()?->coupon  }}" class="p-3 rounded-lg my-2 shadow " type="text" placeholder="Enter coupon here">
+                           
+                        </span>
+                       
+                        <button class="text-green-500 ml-5 py-3 shadow bg-white rounded-lg px-3 font-semibold">Enter</button>
+                    </form>
+                    <x-error name="coupon"></x-error>
+                    
+                <div class="mt-2">
                     <form action="/checkout" method="POST">
                         @csrf
+
                         <h4 class="text-lg text-slate-900 font-semibold mb-3">Payment</h4>
                         <p class="text-normal font-semibold text-slate-900">Select Payment Method</p>
                         <input type="hidden" name="customer_id" value="{{ $customer?->id }}">
+                        @if ($coupon)
+                           
+                            <input type="hidden" name="coupon" value="{{ $coupon->coupon_code }}">
+                            
+                        @endif
+                      
                         @foreach ($payments as $payment)
                             <div class="mt-1">
                                 <input
@@ -161,10 +182,17 @@
                         <h6 class="text-normal text-slate-800 font-semibold">Taxes</h6>
                         <p>0</p>
                     </div>
+                    <div class="flex justify-between items-center">
+                        <h6 class="text-normal text-slate-800 font-semibold">Discount</h6>
+                        <p>{{ $coupon ? $coupon->discount : 0}}%</p>
+                    </div>
                 </div>
                 <div class="flex justify-between items-center ">
                     <h6 class="text-normal text-slate-800 font-bold">Total</h6>
-                    <p class="font-bold">{{ $cart_items?->count() ? $cart_items->sum('total') : 0 }}</p>
+                    @php
+                        $total = $cart_items?->sum('total')
+                    @endphp
+                    <p class="font-bold">{{ $cart_items?->count() ? ($coupon ? $total  - $total*($coupon->discount/100) : $total) : 0  }}</p>
                 </div>
 
                 <div class="py-5">

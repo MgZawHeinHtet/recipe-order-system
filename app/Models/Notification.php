@@ -18,4 +18,12 @@ class Notification extends Model
         return $this->belongsTo(User::class,'recipent_id');
     }
     
+    static function sendNotiAdmin($id,$type){
+        Notification::create([
+            'user_id'=> 1,
+            'noti_type' => $type,
+            'is_read'=> false,
+            'recipent_id'=> $id
+        ]);
+    }
 }

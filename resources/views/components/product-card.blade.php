@@ -30,9 +30,9 @@
             <form action="/products/{{ $product->id }}/addToCart" method="POST">
                 @csrf
                 <input class="hidden" type="number" name="quantity" value="1">
-                <button
-                    class="w-32 py-2 border rounded-3xl border-green-500 text-sm font-bold hover:ring-2 ring-green-500 transition-all duration-75">Add
-                    To Cart</button>
+                
+                <button {{ $outstock = $product->stock < 1 ? 'disabled' : '' }}
+                    class="w-32  disabled:opacity-20 py-2 border rounded-3xl border-green-500 text-sm font-bold hover:ring-2 ring-green-500 transition-all duration-75 "><span class="decoration-red-600 decoration-clone {{ $outstock   ? 'line-through ': '' }}">Add To Cart</span></button>   
             </form>
         </div>
 

@@ -1,8 +1,8 @@
 <div
-    class="py-6 px-10 border-l-4 border-l-green-500 border  border-b-gray-300 {{ !$notification->is_read ? 'bg-gray-200' : '' }}">
+    class="py-6 px-10 border-l-4 border-l-green-500 border border-t-0 border-b-gray-700 {{ !$notification->is_read ? 'bg-gray-600' : '' }}">
     <div class="flex gap-2 items-center justify-between">
         <div class="flex gap-x-3 items-center">
-            <p class="font-bold text-base tracking-wide mb-1"><x-notification-message
+            <p class="font-bold text-base tracking-wide mb-1 text-slate-400"><x-notification-message
                     type="{{ $notification->noti_type }}" :recipent="$notification->recipent->name"></x-notification-message></p>
 
             <span

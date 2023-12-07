@@ -32,4 +32,10 @@ class Order extends Model
             $query->where('order_status_id',$status_id);
         }
     }
+
+    public function scopeUserFilter($query,$request){
+        if($request){
+            $query->where('order_date',$request);
+        }
+    }
 }

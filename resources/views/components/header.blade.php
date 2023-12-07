@@ -17,14 +17,7 @@
                 <a href="/contact">Contact Us</a>
             </li>
 
-            @if (Auth::check())
-                @if (auth()->user()->is_admin)
-                    <li
-                        class="text-lg font-medium hover:underline decoration-green-500 decoration-4 underline-offset-8">
-                        <a href="/dashboard"> Dashboard</a>
-                    </li>
-                @endif
-           @endif
+          
 
         </ul>
 
@@ -63,13 +56,19 @@
                                     class="fa-solid fa-user text-xl text-white"></i> <span
                                     class="text-white ml-5">Profile</span></a>
                         </div>
+                        @if (auth()->user()?->is_admin)
+                        <div class="my-2">
+                            <a class="gap-x-10 py-2" href="/dashboard"><i class="fas fa-desktop text-white text-lg"></i><span
+                                    class="text-white ml-5">Dashboard</span></a>
+                        </div>
+                        @endif
                         <div class="my-2">
                             <a class="gap-x-10 py-2" href="/profile/notifications"><i class="fa-solid fa-bell text-xl text-white"></i>
                                 <span class="text-white ml-5">Notification <span
                                         class="{{ !$noti ? 'hidden':'' }} w-5 h-5  inline-block text-center  rounded-full bg-red-500 text-white text-sm">{{ $noti ?? 0 }}</span></span></a>
                         </div>
                         <div class="my-2">
-                            <a href="/profile/orders" class="gap-x-10 py-2" href=""><i class="fa-solid fa-clock text-xl text-white"></i>
+                        <a href="/profile/orders" class="gap-x-10 py-2" href=""><i class="fa-solid fa-clock text-xl text-white"></i>
                                 <span class="text-white ml-5">Order History</span></a>
                         </div>
                         <hr class="my-2">

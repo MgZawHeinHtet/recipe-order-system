@@ -27,7 +27,7 @@ class CheckoutFormRequest extends FormRequest
             'email' => ['required','email'],
             'address1'=> ['required','max:50'],
             'address2'=> ['required','max:50'],
-            'phone' => ['required','integer','between:0,9'],
+            'phone' => ['required','integer','max:9','min:9'],
             'postal_code' => ['required','integer'],
             
         ];

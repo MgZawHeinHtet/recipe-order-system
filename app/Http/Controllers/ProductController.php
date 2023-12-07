@@ -8,6 +8,7 @@ use App\Models\Notification;
 use App\Models\Product;
 use App\Models\subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 
 
@@ -53,13 +54,17 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $ingredients = explode(',', $product->ingredients);
-
+        $randomProducts = Product::with('category')->where(function($query) use ($product){
+            $query->where('category_id',$product->category_id)->where('id','!=',$product->id);
+        })->inRandomOrder()->limit(5)->get();
 
         return view(
             'product.product-detail',
             [
                 'product' => $product,
-                'randomProducts' => Product::with('category')->inRandomOrder()->limit(5)->get(),
+                'randomProducts' => cache()->remember('users', now()->addMinutes(5), function () use ($randomProducts) {
+                    return $randomProducts;
+                }),
                 'ingredients' => $ingredients
             ]
         );
