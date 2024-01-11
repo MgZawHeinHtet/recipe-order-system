@@ -23,6 +23,7 @@ use App\Http\Controllers\ProfileRatedController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\TrashController;
 use App\Http\Controllers\UserController;
 use App\Models\Order;
 use App\Models\Product;
@@ -71,10 +72,13 @@ Route::middleware(['auth','admin'])->prefix('dashboard')->group(function(){
     Route::get('users',[UserController::class,'dashboard_index']);
     Route::resource('countries',CountryController::class);
     Route::resource('inboxes',InboxController::class);
+    Route::get('product/trash',[ProductController::class, 'trash_products']);
+    // Route::resource('trashes',[TrashController::class]);
 });
 
 Route::middleware('auth')->group(function(){
     Route::post('subscribe',[SubscriberController::class, 'create']);
+    Route::get('/coupon/{user:id}/send',[MailController::class, 'sendCoupon']);
 });
 
 //profile dashboard proile Route
@@ -85,8 +89,12 @@ Route::middleware(['auth'])->prefix('profile')->group(function(){
    Route::post('notifications/read',[NotificationController::class, 'makeAllRead']);
    Route::get('ratedProduct',[ProfileRatedController::class, 'index']);
    Route::get('orders',[ProfileOrderController::class,'index']);
-   
 });
+
+//dashboard product trash bin 
+Route::post('/trash/products/{product:id}/restore',[TrashController::class, 'restore']);
+
+Route::post('/trash/restoreAll',[TrashController::class, 'restoreAll']);
 
 //product signle page for user
 Route::get('/products/{product:id}',[ProductController::class, 'show']);

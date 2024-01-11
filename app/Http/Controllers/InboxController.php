@@ -12,7 +12,7 @@ class InboxController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::with(['user', 'recipent'])->where('user_id',1)->latest()->get();
+        $notifications = Notification::with(['user', 'recipent'])->where('user_id',1)->latest()->take(30)->get();
         $unread_notifications = $notifications->filter(function ($noti) {
             return $noti->is_read == false;
         });

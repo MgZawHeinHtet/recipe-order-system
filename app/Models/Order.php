@@ -27,9 +27,25 @@ class Order extends Model
         return $this->belongsTo(OrderStatus::class);
     }
 
-    public function scopeFilter($query,$request){
-        if($status_id = $request['status']??null){
+    public function scopeFilter($query,$requests){
+        if($status_id = $requests['status']??null){
             $query->where('order_status_id',$status_id);
+        }
+        if($track = $requests['input_track']??null){
+            $query->where('order_number',$track);
+        }
+        if($last_day = $requests['last-day']??null){
+
+            $query->where('created_at',$last_day);
+        }
+        if($seven_day = $requests['7-days']?? null){
+            $query->where('created_at',">=",$seven_day);
+        }
+        if($last_month = $requests['last-month']?? null){
+            $query->whereMonth('created_at',$last_month);
+        }
+        if($last_year = $requests['last-year']?? null){
+            $query->whereYear('created_at',$last_year);
         }
     }
 

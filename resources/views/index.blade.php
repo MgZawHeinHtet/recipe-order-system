@@ -3,7 +3,7 @@
     <x-hero></x-hero>
 
     {{-- today special menu  --}}
-    <x-special-section></x-special-section>
+    <x-special-section :specials="$special_products"></x-special-section>
 
     {{-- popular dish --}}
     <x-popular-dishes :products="$products"></x-popular-dishes>

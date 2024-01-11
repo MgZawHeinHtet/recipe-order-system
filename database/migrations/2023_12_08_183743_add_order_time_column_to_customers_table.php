@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coupons', function (Blueprint $table) {
-            $table->id();
-            $table->string('coupon_code');
-            $table->integer('discount');
-            $table->boolean('valid')->default(1);
-            $table->timestamps();
+        Schema::table('customers', function (Blueprint $table) {
+            $table->integer('order_time')->after('phone')->default(0);
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coupons');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropColumn('order_time');
+        });
     }
 };

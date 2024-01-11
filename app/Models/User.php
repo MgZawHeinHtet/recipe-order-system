@@ -104,4 +104,23 @@ class User extends Authenticatable
         return $this->notifications()->where('is_read',false);
     }
 
+    public function scopeFilter($query,$requests){
+        if($input = $requests['type_input']??null){
+            $query->where('name','LIKE','%'.$input.'%');
+        }
+        if($last_day = $requests['last-day']??null){
+
+            $query->where('created_at',$last_day);
+        }
+        if($seven_day = $requests['7-days']?? null){
+            $query->where('created_at',">=",$seven_day);
+        }
+        if($last_month = $requests['last-month']?? null){
+            $query->whereMonth('created_at',$last_month);
+        }
+        if($last_year = $requests['last-year']?? null){
+            $query->whereYear('created_at',$last_year);
+        }
+    }
+
 }

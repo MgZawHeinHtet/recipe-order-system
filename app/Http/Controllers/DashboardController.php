@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItems;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,27 +15,75 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $date = Carbon::today()->subDays(7);
-        $last_seven_days_orders = Order::where('created_at', ">=", $date)->get();
-        $labels = collect([]);
-        foreach ($last_seven_days_orders as $order) {
-            $labels->push($order->created_at->format('M d'));
-        };
+        $date = date('M d');
 
-        $income_per_days =  DB::table('orders')
-            ->where('orders.created_at', '>=', $date)
-            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
-            ->groupBy(DB::raw('DATE(orders.created_at)'))
-            ->select(
-                DB::raw('SUM(order_items.order_price) as total')
-            )->get();
+        $date_arr = collect([]);
+
+        $full_date_arrs = collect([]);
+
+        $income_amount = [];
+
+       
+
+        for ($i = 0; $i < 7; $i++) {
+            $date_arr->push(date('M d', strtotime("-{$i} days")));
+
+            $full_date_arrs->push([
+                'year' => date("Y", strtotime("-$i days")),
+                'month' => date("m", strtotime("-$i days")),
+                'day' => date("d", strtotime("-$i days")),
+            ]);
+        }
+
+       
+
+        foreach ($full_date_arrs->sortBy('day') as $full_date_arr) {
+
+            $income_amount[] = OrderItems::whereYear('created_at', $full_date_arr['year'])
+                ->whereMonth('created_at', $full_date_arr['month'])
+                ->whereDay('created_at', $full_date_arr['day'])
+                ->sum('total');
+        }
+
+        $today_orders = Order::whereDate('created_at', now())->get();
+
+        $pending = 0;
+        $processing = 0;
+        $shipped = 0;
+        $delivery = 0;
+        $complete = 0;
+
+        foreach ($today_orders as $order) {
+
+            switch ($order->order_status_id) {
+                case 1:
+                    $pending++;
+                    break;
+                case 2:
+                    $processing++;
+                    break;
+                case 3:
+                    $shipped++;
+                    break;
+                case 4:
+                    $delivery++;
+                    break;
+                case 5:
+                    $complete++;
+                    break;
+
+                default:;
+            }
+        }
+        
+        $today_orders = [$pending,$processing,$shipped,$delivery,$complete];
 
         $stocks =  DB::table('products')
-            ->where('products.created_at', '>=', $date)
+            ->where('products.updated_at', '>=', $date)
 
-            ->groupBy(DB::raw('DATE(products.created_at)'))
+            ->groupBy(DB::raw('DATE(products.updated_at)'))
             ->select(
-                DB::raw('SUM(products.price*products.stock) as total')
+                DB::raw('SUM(products.price) as total')
             )->get();
 
         $total_income = OrderItems::sum('total');
@@ -43,13 +92,15 @@ class DashboardController extends Controller
 
 
         return view('Dashboard.index', [
-            'last_seven_days_orders' => $last_seven_days_orders,
-            'labels' => $labels->unique(),
-            'incomes' => $income_per_days,
+            'labels' => $date_arr,
+            'incomes' => $income_amount,
             'stocks' => $stocks,
-            'total_income'=> $total_income,
-            'total_order'=>$total_order,
-            'total_customer'=>$total_customer
+            'total_income' => $total_income,
+            'total_order' => $total_order,
+            'total_customer' => $total_customer,
+            'today_orders' => $today_orders,
+            'customers' => Customer::with('user')->orderBy('order_time','DESC')->take(5)->get(),
+            'stock_products'=>Product::with('category')->where('stock',"<=",5)->orderBy('stock')->paginate(6)
         ]);
     }
 }

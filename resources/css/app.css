@@ -1,17 +1,15 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-    .container{
-        @apply px-32
+@layer components {
+    .container {
+        @apply px-32;
     }
-    .trans{
-        @apply transition-all duration-500
+    .trans {
+        @apply transition-all duration-500;
     }
 }
-
 
 .dropdown {
     position: relative;
@@ -54,21 +52,18 @@
     display: none;
 }
 
-input{
-    outline : none;
+input {
+    outline: none;
 }
 
-textarea{
-    outline : none;
+textarea {
+    outline: none;
 }
 
 /* //shop section */
 
-.category-box::-webkit-scrollbar{
-    display : none;
+.category-box::-webkit-scrollbar {
+    display: none;
 }
-
-
-
 
 

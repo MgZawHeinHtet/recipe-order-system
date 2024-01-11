@@ -22,60 +22,57 @@
                     </svg>
                 </button>
                 <!-- Dropdown menu -->
-                <div id="dropdownRadio"
-                    class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-                    data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top"
-                    style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
-                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownRadioButton">
-                        <li>
-                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="filter-radio-example-1" type="radio" value="" name="filter-radio"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="filter-radio-example-1"
-                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                    day</label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input checked="" id="filter-radio-example-2" type="radio" value=""
-                                    name="filter-radio"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="filter-radio-example-2"
-                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                    7 days</label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="filter-radio-example-3" type="radio" value="" name="filter-radio"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="filter-radio-example-3"
-                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                    30 days</label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="filter-radio-example-4" type="radio" value="" name="filter-radio"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="filter-radio-example-4"
-                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                    month</label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="filter-radio-example-5" type="radio" value="" name="filter-radio"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="filter-radio-example-5"
-                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                    year</label>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <form action="/dashboard/users" onchange="submit()">
+                    <div id="dropdownRadio"
+                        class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                        data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top"
+                        style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
+                        <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                            aria-labelledby="dropdownRadioButton">
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input id="filter-radio-example-1" type="radio"
+                                        value="{{ date('y-m-d', strtotime('-1 days')) }}" name="last-day"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="filter-radio-example-1"
+                                        class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                        day</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input id="filter-radio-example-2" type="radio"
+                                        value="{{ date('y-m-d', strtotime('-7 days')) }}" name="7-days"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="filter-radio-example-2"
+                                        class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                        7 days</label>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input id="filter-radio-example-4" type="radio"
+                                        value="{{ date('m', strtotime('-1 month')) }}" name="last-month"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="filter-radio-example-4"
+                                        class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                        month</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input id="filter-radio-example-5" type="radio"
+                                        value="{{ date('y', strtotime('-1 year')) }}" name="last-year"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="filter-radio-example-5"
+                                        class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
+                                        year</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
             </div>
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative">
@@ -87,9 +84,12 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <input type="text" id="table-search"
-                    class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search for users">
+                <form action="/dashboard/users">
+
+                    <input name="type_input" type="text" id="table-search"
+                        class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search for users">
+                </form>
             </div>
         </div>
 
@@ -122,39 +122,44 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
-                    <tr
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800">
-                        <td class="px-6">
-                            <span class="font-bold">{{ $user->id }}</span>
-                        </td>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white flex items-center ">
-                            <img class="w-10 h-10 rounded-full object-cover" src="{{ $user->img }}" alt="">
-                            <span class="ml-2">{{ $user->name }}</span>
-                        </th>
-                        <td class="px-4 py-4">
-                            <span class="line-clamp-2">
-                                {{ $user->username }}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 ">
-                            {{ $user->email }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $user->gender }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $user->dob }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $user->created_at->format('d-m-y') }}
-                        </td>
+                @if ($users->count())
+                    @foreach ($users as $user)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800">
+                            <td class="px-6">
+                                <span class="font-bold">{{ $user->id }}</span>
+                            </td>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white flex items-center ">
+                                <img class="w-10 h-10 rounded-full object-cover" src="{{ $user->img }}"
+                                    alt="">
+                                <span class="ml-2">{{ $user->name }}</span>
+                            </th>
+                            <td class="px-4 py-4">
+                                <span class="line-clamp-2">
+                                    {{ $user->username }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 ">
+                                {{ $user->email }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $user->gender }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $user->dob }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $user->created_at->format('d-m-y') }}
+                            </td>
 
-                    </tr>
-                @endforeach
-
-
+                        </tr>
+                    @endforeach
+                @else
+                <tr class="w-full h-[600px]">
+                    <td colspan="8" class="text-center text-lg tracking-wider">No user found 🤷‍♀️</td>
+                </tr>
+                @endif
             </tbody>
 
         </table>

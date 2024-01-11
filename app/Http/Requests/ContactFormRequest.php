@@ -24,7 +24,7 @@ class ContactFormRequest extends FormRequest
         return [
             'name'=> ['required'],
             'email'=>['required','email'],
-            'message'=>['required','min:20']
+            'message'=>['required','min:20','string']
         ];
     }
 }

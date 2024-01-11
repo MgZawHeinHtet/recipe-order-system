@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ProductController;
 use App\Models\Basket;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +45,18 @@ Route::get('/users',function(){
             'status'=>500
         ];
     }
-   
+});
+
+Route::get('/products',function(){
+    try {
+        return [
+            'products'=>Product::latest()->get(),
+            'status'=>200
+        ];
+    } catch (ErrorException $e) {
+        return [
+            'err'=>$e->getMessage(),
+            'status'=>500
+        ];
+    }
 });

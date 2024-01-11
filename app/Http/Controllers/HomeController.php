@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\SpecialProduct;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,7 @@ class HomeController extends Controller
             'products' => Product::orderBy('rating','asc')->take(10)->get(),
             'services' => $this->getService(),
             'reviews' => Review::with('user')->latest()->get(),
-          
+            'special_products' => SpecialProduct::all()
         ]);
     }
       //get data for service section hard data

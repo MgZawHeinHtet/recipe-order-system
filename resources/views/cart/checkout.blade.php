@@ -1,6 +1,7 @@
 @props(['cart_items' => null, 'customer' => null])
 
 <x-layout>
+    
     <section class="container space-y-8 mb-8">
         <h2 class="text-2xl text-slate-080 font-semibold text-center">Check Out</h2>
         <div class="grid grid-cols-3 gap-16">
@@ -232,3 +233,13 @@
     </section>
 
 </x-layout>
+
+@section('javascript')
+<script>
+    $(function() {
+        $( "form" ).submit(function() {
+            $('#loader').show();
+        });
+    });
+    </script>
+@endsection

@@ -19,8 +19,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $requests = request(['type', 'last-day', '7-days', 'last-month', 'last-year']);
         return view('Dashboard.product', [
-            "products" => Product::with('category')->latest()->paginate(10)
+            "products" => Product::with('category')->filter($requests)->latest()->paginate(10)
         ]);
     }
 
@@ -54,8 +55,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $ingredients = explode(',', $product->ingredients);
-        $randomProducts = Product::with('category')->where(function($query) use ($product){
-            $query->where('category_id',$product->category_id)->where('id','!=',$product->id);
+        $randomProducts = Product::with('category')->where(function ($query) use ($product) {
+            $query->where('category_id', $product->category_id)->where('id', '!=', $product->id);
         })->inRandomOrder()->limit(5)->get();
 
         return view(
@@ -124,5 +125,12 @@ class ProductController extends Controller
 
         $product->delete();
         return back()->with('delete', 'Delete Successfully! 🎆');
+    }
+
+    public function trash_products()
+    {
+        return view('Dashboard.product-trash', [
+            'trash_products' => Product::onlyTrashed()->paginate(10)
+        ]);
     }
 }

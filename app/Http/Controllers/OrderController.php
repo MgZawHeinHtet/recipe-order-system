@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $requests = request(['status']);
+        $requests = request(['status','input_track', 'last-day', '7-days', 'last-month', 'last-year']);
         return view('Dashboard.order',[
             'orders' => Order::with('customer','payment')->filter($requests)->latest()->paginate(10),
             'statuses' => OrderStatus::all()

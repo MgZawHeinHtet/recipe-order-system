@@ -16,9 +16,9 @@ class Product extends Model
     public static function boot(){
         parent::boot();
         static::deleted(function($item) { 
-            if(File::exists($file = public_path($item->photo)) ){
-                File::delete($file);
-            }
+            // if(File::exists($file = public_path($item->photo)) ){
+            //     File::delete($file);
+            // }
             CartItem::where('product_id',$item->id)->delete();
         });
     }
@@ -86,7 +86,8 @@ class Product extends Model
     }
 
     public function scopeFilter($query,$requests){
-        
+
+
         if($type = $requests['type']?? null){
             $query->where('title','LIKE','%'.$type.'%');
         }
@@ -98,6 +99,20 @@ class Product extends Model
         
         if($category = $requests['category']?? null){
             $query->where('category_id',$category);
+        }
+
+        if($last_day = $requests['last-day']??null){
+
+            $query->where('created_at',$last_day);
+        }
+        if($seven_day = $requests['7-days']?? null){
+            $query->where('created_at',">=",$seven_day);
+        }
+        if($last_month = $requests['last-month']?? null){
+            $query->whereMonth('created_at',$last_month);
+        }
+        if($last_year = $requests['last-year']?? null){
+            $query->whereYear('created_at',$last_year);
         }
     }
 

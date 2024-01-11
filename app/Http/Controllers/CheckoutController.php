@@ -14,7 +14,7 @@ use App\Models\OrderItems;
 use App\Models\Notification;
 use App\Models\Payment;
 use App\Models\Product;
-use Illuminate\Support\Str;
+    use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification as NotificationsNotification;
 use Illuminate\Support\Facades\Hash;
@@ -46,7 +46,7 @@ class CheckoutController extends Controller
         if ($coupon_code =  request()->coupon) {
             $coupon = Coupons::where('coupon_code', $coupon_code)?->get()->first();
             if (!$coupon->valid) {
-                return back()->withErrors(['coupon' => 'coupon is already used.👍']);
+                return redirect('/checkout')->withErrors(['coupon' => 'coupon is already used.👍']);
             }
         }
 
@@ -57,6 +57,9 @@ class CheckoutController extends Controller
         if (!$customer_id) {
             return back()->with('warning', 'Pls fill Your Info First');
         }
+
+        $customer_order = Customer::find($customer_id);
+        $customer_order->order_time += 1;
 
         $order = Order::create([
             'customer_id' => $customer_id,
@@ -101,6 +104,9 @@ class CheckoutController extends Controller
             $coupon->valid = false;
             $coupon->update();
         }
+
+        //update customer order time
+        $customer_order->update();
 
         //delete all data from cart
         $curr_user->cart->cart_items()->delete();

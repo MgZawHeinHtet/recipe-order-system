@@ -28,14 +28,14 @@
                 <hr class="border-gray-300 border-2 mb-4">
 
                 <div class="space-y-3">
-                    @foreach ($latestProducts as $product)
+                    @foreach ($specialProducts as $product)
                         <div class="flex items-center justify-center gap-4">
                             <div>
-                                <img class="w-14 h-14 rounded" src="{{ asset('assets/shop-bg.jpg') }}" alt="">
+                                <img class="w-14 h-14 rounded" src="{{ $product->photo }}" alt="">
                             </div>
                             <div class="flex-1">
-                                <p class="font-semibold text-gray-600">Grabic contton</p>
-                                <p class="text-gray-600">$400</p>
+                                <p class="font-semibold text-gray-600">{{ $product->title }}</p>
+                                <p class="text-gray-600">${{ $product->price }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -56,7 +56,7 @@
                         </div>
                     @else
                         <div class="space-y-3 h-64">
-                            @foreach ($cart->cart_items as $item)
+                            @foreach ($cart->cart_items->load('product') as $item)
                                 <div class="flex items-center justify-center gap-4">
                                     <div>
                                         <img class="w-14 h-14 rounded" src="{{ $item->product->photo }}" alt="">

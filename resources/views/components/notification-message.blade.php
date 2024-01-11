@@ -40,6 +40,10 @@
 @endif
 
 @if($type === 'subscribe')
-
 <span>{{ $recipent }} was subscribed</span>
+@endif
+
+@if($type === 'recive-coupon')
+<span>You get a discount coupon.check your mail</span>
+
 @endif
