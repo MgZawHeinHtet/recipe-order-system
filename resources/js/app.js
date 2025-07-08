@@ -18,7 +18,6 @@ const profileShow = document.querySelector(".profile-show");
 const profileEdit = document.querySelector(".profile-edit");
 
 
-
 if (settingBtn) {
     settingBtn.addEventListener('click', function () {
         profileShow.classList.toggle('hidden');
