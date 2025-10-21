@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function dashboard_index(){
+        dd("nice");
         $requests = request(['type_input','last-day','7-days','last-month','last-year']);
         return view('Dashboard.user',[
             'users'=> User::where('is_admin',false)->filter($requests)->paginate(10)

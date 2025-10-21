@@ -15,7 +15,7 @@
 
             <div class="mb-10 flex gap-10 items-center">
                 <div><img class="w-36 h-36 rounded-full shadow object-cover ring-1 p-3 ring-green-500"
-                        src="{{ https://$user->img }}" alt=""></div>
+                        src="{{$user->img }}" alt=""></div>
 
             </div>
 
